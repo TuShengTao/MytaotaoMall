@@ -42,6 +42,7 @@
 
     <dependencyManagement>
         <dependencies>
+
             <!-- 时间操作组件 -->
             <dependency>
                 <groupId>joda-time</groupId>
@@ -76,12 +77,12 @@
                 <artifactId>httpclient</artifactId>
                 <version>${httpclient.version}</version>
             </dependency>
-            <!-- 单元测试 -->
+            <!-- 单元测试 scope设置作用范围 -->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
-                <scope>test</scope>
+                <scope>compile</scope>
             </dependency>
             <!-- 日志处理 -->
             <dependency>

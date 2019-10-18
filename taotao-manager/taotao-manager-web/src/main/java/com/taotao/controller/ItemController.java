@@ -1,6 +1,9 @@
 package com.taotao.controller;
 
+import com.taotao.common.pojo.EUDataGridResult;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +25,8 @@ import com.taotao.service.ItemService;
  * @version 1.0
  */
 
+
+
 @Controller
 public class ItemController {
 
@@ -34,14 +39,13 @@ public class ItemController {
 		TbItem tbItem = itemService.getItemById(itemId);
 		return tbItem;
 	}
-	/**
 	@RequestMapping("/item/list")
 	@ResponseBody
 	public EUDataGridResult getItemList(Integer page, Integer rows) {
 		EUDataGridResult result = itemService.getItemList(page, rows);
 		return result;
 	}
-	
+	/**
 	@RequestMapping(value="/item/save", method=RequestMethod.POST)
 	@ResponseBody
 	private TaotaoResult createItem(TbItem item, String desc, String itemParams) throws Exception {

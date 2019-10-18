@@ -29,6 +29,9 @@
                 <configuration>
                     <port>8080</port>
                     <path>/</path>
+                    <!-- 热部署 这是关键要设置为true，默认设置是false，类比Tomcat里server.xml中的设置-->
+                    <contextReloadable>true</contextReloadable>
+
                 </configuration>
             </plugin>
         </plugins>
