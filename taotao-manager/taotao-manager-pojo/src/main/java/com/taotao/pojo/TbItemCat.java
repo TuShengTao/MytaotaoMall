@@ -1,8 +1,9 @@
 package com.taotao.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class TbItemCat {
+public class TbItemCat  {
     private Long id;
 
     private Long parentId;
