@@ -19,9 +19,8 @@ import com.taotao.service.ItemService;
  * 商品管理Controller
  * <p>Title: ItemController</p>
  * <p>Description: </p>
- * <p>Company: www.itcast.com</p> 
- * @author	入云龙
- * @date	2015年9月2日上午10:52:46
+ * <p>Company: www.itcast.com</p>
+ * @author tushengtao
  * @version 1.0
  */
 
@@ -34,7 +33,8 @@ public class ItemController {
 	private ItemService itemService;
 	
 	@RequestMapping("/item/{itemId}")//地址栏url路径映射到此controller方法
-	@ResponseBody//此注解把java对象转换成json
+	//此注解把java对象转换成json
+	@ResponseBody
 	public TbItem getItemById(@PathVariable Long itemId) {
 		TbItem tbItem = itemService.getItemById(itemId);
 		return tbItem;
