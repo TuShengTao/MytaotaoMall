@@ -1,6 +1,7 @@
 package com.taotao.controller;
 
 import com.taotao.common.pojo.EUDataGridResult;
+import com.taotao.common.pojo.TaotaoResult;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Description;
@@ -23,9 +24,6 @@ import com.taotao.service.ItemService;
  * @author tushengtao
  * @version 1.0
  */
-
-
-
 @Controller
 public class ItemController {
 
@@ -33,7 +31,7 @@ public class ItemController {
 	private ItemService itemService;
 	
 	@RequestMapping("/item/{itemId}")//地址栏url路径映射到此controller方法
-	//此注解把java对象转换成json
+//	此注解把java对象转换成json
 	@ResponseBody
 	public TbItem getItemById(@PathVariable Long itemId) {
 		TbItem tbItem = itemService.getItemById(itemId);
@@ -45,12 +43,17 @@ public class ItemController {
 		EUDataGridResult result = itemService.getItemList(page, rows);
 		return result;
 	}
-	/**
 	@RequestMapping(value="/item/save", method=RequestMethod.POST)
 	@ResponseBody
 	private TaotaoResult createItem(TbItem item, String desc, String itemParams) throws Exception {
-		TaotaoResult result = itemService.createItem(item, desc, itemParams);
+	    /**
+	     * @author: tushengtao
+	     * @date: 2019/10/24
+	     * @Description: 使用pojo来接收新增商品数据 表单名字要和属性值一致 返回TaotaoResult
+	     * @param: [item, desc, itemParams]
+	     * @return: com.taotao.common.pojo.TaotaoResult
+	     */
+		TaotaoResult result = itemService.createItem(item,desc);
 		return result;
 	}
-	**/
 }
