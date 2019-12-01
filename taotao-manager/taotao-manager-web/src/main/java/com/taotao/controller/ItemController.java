@@ -31,7 +31,6 @@ public class ItemController {
 	private ItemService itemService;
 	
 	@RequestMapping("/item/{itemId}")//地址栏url路径映射到此controller方法
-//	此注解把java对象转换成json
 	@ResponseBody
 	public TbItem getItemById(@PathVariable Long itemId) {
 		TbItem tbItem = itemService.getItemById(itemId);
