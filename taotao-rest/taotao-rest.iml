@@ -22,7 +22,11 @@
         <fileset id="web taotao-manager servlet context" name="MVC taotao-manager servlet context" removed="true">
           <file>file://$MODULE_DIR$/src/main/resources/spring/springmvc-config.xml</file>
         </fileset>
-        <fileset id="fileset" name="Spring Application Context" removed="false">
+        <fileset id="web taotao-rest servlet context" name="MVC taotao-rest servlet context" removed="true">
+          <dependency>web application context</dependency>
+          <file>file://$MODULE_DIR$/src/main/resources/spring/springmvc-config.xml</file>
+        </fileset>
+        <fileset id="fileset" name="Spring Application Context Rest" removed="false">
           <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-dao.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-jedis.xml</file>
           <file>file://$MODULE_DIR$/src/main/resources/spring/applicationContext-service.xml</file>
