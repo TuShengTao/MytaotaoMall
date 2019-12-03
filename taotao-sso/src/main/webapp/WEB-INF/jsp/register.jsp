@@ -15,7 +15,7 @@
 <div class="w" id="logo">
     <div>
     	<a href="http://www.taotao.com">
-    		<img src="/images/taotao-logo.gif" alt="淘淘商城" width="170" height="60"/>
+    		<img src="/images/taotao-logo.gif" alt="惠淘淘商城" width="170" height="60"/>
     	</a> <b></b>
     </div>
 </div>
@@ -148,6 +148,7 @@
 		beforeSubmit:function() {
 				//检查用户是否已经被占用
 				$.ajax({
+                    //+"/1?r=" + Math.random()  再次发起相同请求 防止浏览器缓存的作用
 	            	url : REGISTER.param.surl + "/user/check/"+escape($("#regName").val())+"/1?r=" + Math.random(),
 	            	success : function(data) {
 	            		if (data.data) {
@@ -156,6 +157,7 @@
 	            				url : REGISTER.param.surl + "/user/check/"+$("#phone").val()+"/2?r=" + Math.random(),
 				            	success : function(data) {
 				            		if (data.data) {
+				            		    // 用户名 和 手机号 验证成功 执行提交 注册
 					            		REGISTER.doSubmit();
 				            		} else {
 				            			alert("此手机号已经被注册！");

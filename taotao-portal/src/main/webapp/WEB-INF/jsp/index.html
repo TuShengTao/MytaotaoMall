@@ -10,9 +10,11 @@
 	<link rel="stylesheet" type="text/css" href="/css/mycss/style.css">
 	<link rel="stylesheet" type="text/css" href="/css/mycss/global.css">
 	<script type="text/javascript" src="/js/myjs/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript"src="/js/myjs/jquery.cookie.js"></script>
 	<script type="text/javascript" src="/js/myjs/goodscat.js"></script>
     <script type="text/javascript" src="/js/myjs/ad.js"></script>
 	<script type="text/javascript" src="/js/myjs/turnToOtherPage.js"></script>
+	<script type="text/javascript" src="/js/myjs/LoginRegister.js"></script>
 	<script type="text/javascript" src="/js/myjs/jsstyle.js"></script>
 </head>
 
@@ -28,7 +30,7 @@
 
 				<div class="xing"></div>
 
-				<a href="">收藏京东</a>
+				<a href="">收藏惠淘淘</a>
 
 			</li>
 
@@ -38,7 +40,7 @@
 
 				<div class="erwei"></div>
 
-				<a href="" class="aa">关注京东
+				<a href="" class="aa">关注惠淘淘
 
 					<!-- 将二维图添加进a标签里 -->
 
@@ -62,13 +64,11 @@
 
 		</ul>
 
-
-
 		<div id="hello">
+				<span id="SpanUsername"></span>    您好，欢迎来到惠淘淘！
+				<span id="LSUrl">
 
-				<span>您好，欢迎来到京东！
-
-				<a href="">[登陆]</a><a href="">[免费注册]</a>
+				<a href="http://localhost:8084/page/login">[登陆]</a><a href="http://localhost:8084/page/register">[免费注册]</a>
 
 				</span>
 
@@ -118,7 +118,7 @@
 
 					<div class="cun">
 
-						<a href="" class="dong">手机京东</a>
+						<a href="" class="dong">手机端</a>
 
 						<div class="phonetu"></div>
 
@@ -134,7 +134,7 @@
 
 						<div class="span1">
 
-							<span >京东客户端</span>
+							<span >惠淘淘客户端</span>
 
 						</div>
 
@@ -208,19 +208,19 @@
 
 						<div class="tesemain">
 
-							<a href="">京东通信</a>
+							<a href="">惠淘淘通信</a>
 
 							<a href="">校园之星</a>
 
 							<a href="">视频购物</a>
 
-							<a href="">京东社区</a>
+							<a href="">惠淘淘社区</a>
 
 							<a href="">在线读书</a>
 
 							<a href="">装机大师</a>
 
-							<a href="">京东E卡　</a>
+							<a href="">惠淘淘E卡　</a>
 
 							<a href="">家装城</a>
 
@@ -316,7 +316,7 @@
 
 		<div class="mytu"></div>
 
-		<a href="javascript:void(0);" id="testHtml" >我的京东</a>
+		<a href="javascript:void(0);" id="testHtml" >我的惠淘淘</a>
 
 		<div class="jiantou"></div>
 
@@ -564,7 +564,7 @@
 
 		<div class="kuaibao">
 
-			<span>京东快报</span>
+			<span>惠淘淘快报</span>
 
 			<a href="">更多快报></a>
 
@@ -578,7 +578,7 @@
 
 				<li><a href="">关于假冒客服诈骗的声明</a></li>
 
-				<li><a href="">京东值得买 9.9元购了</a></li>
+				<li><a href="">惠淘淘值得买 9.9元购了</a></li>
 
 				<li><a href="">阿根廷野生红虾4斤178元</a></li>
 
@@ -698,7 +698,7 @@
 
 								<input type="text" value="请输入手机号" class="shuru1" style="color:#ccc" />
 
-								<span class="span2">支持移动、联通、电信京东、通信</span>
+								<span class="span2">支持移动、联通、电信惠淘淘、通信</span>
 
 								<span class="close">X</span>
 
@@ -1061,7 +1061,7 @@
 
 			<div class="zhe1">
 
-				<h3>京东首发</h3>
+				<h3>惠淘淘首发</h3>
 
 				<div class="life1"><a href="">MR X8游戏本</a></div>
 
@@ -1093,7 +1093,7 @@
 
 			<div class="zhe1">
 
-				<h3>京东预售</h3>
+				<h3>惠淘淘预售</h3>
 
 				<div class="life1"><a href="">魔力按摩贴</a></div>
 
@@ -1242,11 +1242,11 @@
 
 			<div class="bao"><a href="">延保服务</a></div>
 
-			<div class="bao"><a href="">京东E卡</a></div>
+			<div class="bao"><a href="">惠淘淘E卡</a></div>
 
 			<div class="bao"><a href="">节能补贴</a></div>
 
-			<div class="bao"><a href="">京东通信</a></div>
+			<div class="bao"><a href="">惠淘淘通信</a></div>
 
 		</div>
 
@@ -1254,9 +1254,9 @@
 
 	<div class="xright">
 
-		<h3>京东自营覆盖区县</h3>
+		<h3>惠淘淘自营覆盖区县</h3>
 
-		<span>京东已向全国1864个区县提供自营配送服务，支持货到付款、POS机刷卡和售后上门服务。</span>
+		<span>惠淘淘已向全国1864个区县提供自营配送服务，支持货到付款、POS机刷卡和售后上门服务。</span>
 
 		<a href="">查看详情></a>
 
@@ -1282,15 +1282,15 @@
 
 		<a href="">营销中心</a>
 
-		<a href="">手机京东</a>
+		<a href="">手机惠淘淘</a>
 
 		<a href="">友情链接</a>
 
 		<a href="">销售联盟</a>
 
-		<a href="">京东社区</a>
+		<a href="">惠淘淘社区</a>
 
-		<a href="">京东公益</a>
+		<a href="">惠淘淘公益</a>
 
 		<a href="" style="border-right:none">English Site</a>
 
@@ -1302,9 +1302,9 @@
 
 		<span><a href="">音像制品经营许可证苏宿批005号</a>  |  出版物经营许可证编号新出发(苏)批字第N-012号  |  互联网出版许可证编号新出网证(京)字150号</span>
 
-		<span><a href="">网络文化经营许可证京网文[2011]0168-061号</a>  违法和不良信息举报电话：4006561155  Copyright © 2004-2014  京东JD.com 版权所有</span>
+		<span><a href="">网络文化经营许可证京网文[2011]0168-061号</a>  违法和不良信息举报电话：4006561155  Copyright © 2004-2014  惠淘淘JD.com 版权所有</span>
 
-		<span>京东旗下网站：<a href="">360TOP</a>  <a href="">拍拍网</a> <a href="">网银在线</a> </span>
+		<span>惠淘淘旗下网站：<a href="">360TOP</a>  <a href="">拍拍网</a> <a href="">网银在线</a> </span>
 
 	</div>
 

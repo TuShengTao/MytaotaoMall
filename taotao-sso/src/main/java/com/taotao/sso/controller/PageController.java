@@ -19,6 +19,7 @@ public class PageController {
 	public String showRegister() {
 		return "register";
 	}
+
 	@RequestMapping("/login")
 	public String showLogin(String redirect, Model model) {
 		model.addAttribute("redirect", redirect);

@@ -19,7 +19,7 @@ $(document).ready(function(){
 			var $point='<strong >'+$sellPoint+'</strong>';
             $('#name').append($point);
 
-			var $price=item.price/10; //价格
+			var $price=item.price/100; //价格
 			var $Price='<strong class="p-price"  id="jd-price">￥'+$price+'<strong >';
 			$('#goodPrice').append($Price);
 

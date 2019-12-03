@@ -79,7 +79,6 @@ public class UserController {
 	@RequestMapping(value="/register", method=RequestMethod.POST)
 	@ResponseBody
 	public TaotaoResult createUser(TbUser user) {
-		
 		try {
 			TaotaoResult result = userService.createUser(user);
 			return result;
@@ -95,7 +94,6 @@ public class UserController {
 	public TaotaoResult userLogin(String username, String password,
 			HttpServletRequest request, HttpServletResponse response) {
 		try {
-			
 			TaotaoResult result = userService.userLogin(username, password, request, response);
 			return result;
 		} catch (Exception e) {
@@ -103,7 +101,13 @@ public class UserController {
 			return TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
 		}
 	}
-	
+	/**
+	 * @author: tushengtao
+	 * @date: 2019/12/2
+	 * @Description:  在 portal系统 里使用 ajax jsonp调用 验证用户是否已经登录 取用户信息
+	 * @param:
+	 * @return:
+	 */
 	@RequestMapping("/token/{token}")
 	@ResponseBody
 	public Object getUserByToken(@PathVariable String token, String callback) {
@@ -114,7 +118,6 @@ public class UserController {
 			e.printStackTrace();
 			result = TaotaoResult.build(500, ExceptionUtil.getStackTrace(e));
 		}
-		
 		//判断是否为jsonp调用
 		if (StringUtils.isBlank(callback)) {
 			return result;
@@ -123,6 +126,5 @@ public class UserController {
 			mappingJacksonValue.setJsonpFunction(callback);
 			return mappingJacksonValue;
 		}
-		
 	}
 }

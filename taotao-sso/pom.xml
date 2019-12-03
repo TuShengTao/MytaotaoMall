@@ -76,9 +76,11 @@
                 <configuration>
                     <port>8084</port>
                     <path>/</path>
-                    <url>http://192.168.25.136:8082/manager/text</url>
-                    <username>tomcat</username>
-                    <password>tomcat</password>
+                    <!-- 先注释 2019/12/2 -->
+                    <!--<url>http://192.168.25.136:8082/manager/text</url>-->
+                    <!--<username>tomcat</username>-->
+                    <!--<password>tomcat</password>-->
+
                     <!-- 热部署 这是关键要设置为true，默认设置是false，类比Tomcat里server.xml中的设置-->
                     <contextReloadable>true</contextReloadable>
                 </configuration>

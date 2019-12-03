@@ -90,11 +90,15 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public TaotaoResult userLogin(String username, String password,
 			HttpServletRequest request, HttpServletResponse response) {
-		
+		//逆向工程查询例子  TbUserExample 先添加查询条件
 		TbUserExample example = new TbUserExample();
 		Criteria criteria = example.createCriteria();
 		criteria.andUsernameEqualTo(username);
+
+		// 执行查询  private TbUserMapper userMapper;
+
 		List<TbUser> list = userMapper.selectByExample(example);
+
 		//如果没有此用户名
 		if (null == list || list.size() == 0) {
 			return TaotaoResult.build(400, "用户名或密码错误");
@@ -127,12 +131,11 @@ public class UserServiceImpl implements UserService {
 		String json = jedisClient.get(REDIS_USER_SESSION_KEY + ":" + token);
 		//判断是否为空
 		if (StringUtils.isBlank(json)) {
-			return TaotaoResult.build(400, "此session已经过期，请重新登录");
+			return TaotaoResult.build(400, "此session(token)已经过期，请重新登录");
 		}
 		//更新过期时间
 		jedisClient.expire(REDIS_USER_SESSION_KEY + ":" + token, SSO_SESSION_EXPIRE);
 		//返回用户信息
 		return TaotaoResult.ok(JsonUtils.jsonToPojo(json, TbUser.class));
 	}
-
 }
