@@ -1,5 +1,7 @@
 package com.taotao.portal.pojo;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Item {
 
 	private String id;
@@ -52,7 +54,10 @@ public class Item {
 	public void setItem_des(String item_des) {
 		this.item_des = item_des;
 	}
-	
+
+	//此注解： 在序列化成json时忽略此方法
+
+	@JsonIgnore
 	public String[] getImages() {
 		if (image != null) {
 			String[] images = image.split(",");

@@ -1,4 +1,4 @@
-//商品信息的展示 使用 ajax请求数据
+//商品信息的展示 使用 ajax请求数据 商品规格参数暂未实现
 var $descUrl="http://localhost:8082/item/desc/";
 var $paramUrl= "http://localhost:8082/item/param/";
 var $href= window.location.href;  //可以获取地址栏url
@@ -26,7 +26,9 @@ $(document).ready(function(){
 			var $goodId=item.id;//商品id
 			var $ID='<span >'+$goodId+'</span>';
            $('#goodId').append($ID);
-
+           $carUrl='http://localhost:8082/cart/add/'+$id;
+           $('#carUrl').val($carUrl);
+           //$('#InitCartUrl').attr('href',$carUrl); //   添加进购物车url :  cart/add/${item.id}.html
 			//添加商品详情图片
 			for (var i=0;i<item.images.length;i++){
 				var $src=item.images[i];
@@ -52,14 +54,11 @@ function getParam() {
 }
 //获取商品描述
 function getDesc() {
-	alert("执行商品描述");
-	alert($descUrl+$id);
     $.ajax({
         url:$descUrl+$id,
         type: "GET",                     //类型，POST或者GET
         dataType: "json",                //数据返回类型，可以是xml、json等
         success: function (data) {
-        	alert("商品描述请求成功！");
         	console.log("输出返回的商品描述:");
         	console.log(data);
             $("#item-desc").append(data);

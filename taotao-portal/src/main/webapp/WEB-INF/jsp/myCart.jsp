@@ -13,7 +13,8 @@
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <link rel="stylesheet" href="/css/base.css">
    <link href="/css/purchase.2012.css?v=201410141639" rel="stylesheet" type="text/css">
-   <title>我的购物车 - 淘淘商城</title>
+    <script type="text/javascript" src="/js/myjs/myCar.js"></script>
+   <title>我的购物车 - 惠淘淘商城</title>
    <script>
    	var pageConfig  = {};
    </script>
