@@ -14,7 +14,6 @@
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/jsp/" />
-
 		<property name="suffix" value=".html" />
 	</bean>
 	<mvc:default-servlet-handler />
@@ -27,6 +26,7 @@
 			<!--<bean class="com.taotao.portal.interceptor.LoginInterceptor"/>-->
 		<!--</mvc:interceptor>-->
 	<!--</mvc:interceptors>-->
+
 	<!--  拦截器测试！ -->
 	<mvc:interceptors>
 		<mvc:interceptor>

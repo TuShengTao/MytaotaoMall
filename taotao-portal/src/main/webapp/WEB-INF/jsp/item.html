@@ -1,8 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>${item.title }惠淘淘</title>
-	<script>var jdpts = new Object(); jdpts._st = new Date().getTime();</script>
+	<title>商品详情-惠淘淘</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link rel="stylesheet" type="text/css" href="/css/taotao.css" media="all" />
 	<link rel="stylesheet" type="text/css" href="/css/pshow.css" media="all" />
@@ -17,7 +16,6 @@
 	<script type="text/javascript" src="/js/myjs/goodDetail.js"></script>
 	<script type="text/javascript" src="/js/myjs/LoginRegister.js"></script>
 	<script type="text/javascript" src="/js/myjs/goodsCar.js"></script>
-	<script type="text/javascript" src="/js/myjs/myCar.js"></script>
 	<script type="text/javascript" src="/js/myjs/jsstyle.js"></script>
 	<script type="text/javascript">
         window.pageConfig = {
@@ -299,7 +297,7 @@
 
 	<div class="logo">
 
-		<img src="/images/myimages/logo.png" alt="" />
+		<img src="/images/myimages/myLogo.png" alt="" width="230" height="60" />
 
 		<div class="dongtu"></div>
 
@@ -423,7 +421,7 @@
 
 		<div class="chetu"></div>
 
-		<a href="">去购物车结算</a>
+		<a onclick="goToMyCar()" href="javascript:void(0);">我的购物车</a>
 
 		<div class="jianleft"></div>
 
@@ -500,7 +498,7 @@
 
 		<ul>
 
-			<li><a href="" style="background: #A40000">首页</a></li>
+			<li><a href="/" style="background: #A40000">首页</a></li>
 
 			<li><a href="">服装城</a></li>
 

@@ -39,7 +39,6 @@ public class UserServiceImpl implements UserService {
 				TbUser user = (TbUser) result.getData();
 				return user;
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -15,8 +15,8 @@
 <div class="w" id="logo">
     <div>
     	<a href="http://www.taotao.com">
-    		<img src="/images/taotao-logo.gif" alt="惠淘淘商城" width="170" height="60"/>
-    	</a> <b></b>
+            <img src="/images/myLogo.png" alt="" width="230" height="60" />
+    	</a>
     </div>
 </div>
 
@@ -95,7 +95,7 @@
                     <div class="fl item-ifo">
                         <input type="checkbox" class="checkbox" checked="checked" id="readme"
                                onclick="agreeonProtocol();">
-                        <label for="protocol">我已阅读并同意<a href="#" class="blue" id="protocol">《淘淘用户注册协议》</a></label>
+                        <label for="protocol">我已阅读并同意<a href="#" class="blue" id="protocol">《惠淘淘用户注册协议》</a></label>
                         <span class="clr"></span>
                         <label id="protocol_error" class="error hide">请接受服务条款</label>
                     </div>

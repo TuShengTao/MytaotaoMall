@@ -112,42 +112,10 @@
                                         <span class="label">所在地：</span>
                                         <div class="fl">
                                             <select name="userVo.province" class="selt mr5" id="province" value="2">
-                                                                                                    <option value="1">北京</option>
-                                                                                                    <option value="2">上海</option>
-                                                                                                    <option value="3">天津</option>
-                                                                                                    <option value="4">重庆</option>
-                                                                                                    <option value="5">河北</option>
-                                                                                                    <option value="6">山西</option>
-                                                                                                    <option value="7">河南</option>
-                                                                                                    <option value="8">辽宁</option>
-                                                                                                    <option value="9">吉林</option>
-                                                                                                    <option value="10">黑龙江</option>
-                                                                                                    <option value="11">内蒙古</option>
-                                                                                                    <option value="12">江苏</option>
-                                                                                                    <option value="13">山东</option>
-                                                                                                    <option value="14">安徽</option>
-                                                                                                    <option value="15">浙江</option>
-                                                                                                    <option value="16">福建</option>
-                                                                                                    <option value="17">湖北</option>
+                                                                                                    <option value="1">北京</option><option value="4">重庆</option>
+                                                    <option value="17">湖北</option>
                                                                                                     <option value="18">湖南</option>
-                                                                                                    <option value="19">广东</option>
-                                                                                                    <option value="20">广西</option>
-                                                                                                    <option value="21">江西</option>
-                                                                                                    <option value="22">四川</option>
-                                                                                                    <option value="23">海南</option>
-                                                                                                    <option value="24">贵州</option>
-                                                                                                    <option value="25">云南</option>
-                                                                                                    <option value="26">西藏</option>
-                                                                                                    <option value="27">陕西</option>
-                                                                                                    <option value="28">甘肃</option>
-                                                                                                    <option value="29">青海</option>
-                                                                                                    <option value="30">宁夏</option>
-                                                                                                    <option value="31">新疆</option>
-                                                                                                    <option value="32">台湾</option>
-                                                                                                    <option value="42">香港</option>
-                                                                                                    <option value="43">澳门</option>
-                                                                                                    <option value="84">海外</option>
-                                                                                            </select>
+                                                 </select>
                                             <select name="userVo.city" class="selt mr5" id="city" value="2826"><option value="78">黄浦区</option><option value="2811">卢湾区</option><option value="2813">徐汇区</option><option value="2815">长宁区</option><option value="2817">静安区</option><option value="2820">闸北区</option><option value="2822">虹口区</option><option value="2823">杨浦区</option><option value="2824">宝山区</option><option value="2825">闵行区</option><option value="2826">嘉定区</option><option value="2830">浦东新区</option><option value="2833">青浦区</option><option value="2834">松江区</option><option value="2835">金山区</option><option value="2836">南汇区</option><option value="2837">奉贤区</option><option value="2841">普陀区</option><option value="2919">崇明县</option></select>
                                             <select name="userVo.county" class="selt mr5" id="county" value="2864"><option value="2864">外环以外</option></select>
 											<div class="clr"></div><div class="prompt-06"><span id="city_msg"></span></div>

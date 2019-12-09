@@ -8,16 +8,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.taotao.common.utils.CookieUtils;
 import com.taotao.common.utils.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.portal.pojo.CartItem;
 import com.taotao.portal.service.CartService;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * @author: tushengtao
@@ -38,10 +36,10 @@ public class CartController {
 	public String addCartItem(@PathVariable Long itemId,
 			@RequestParam(defaultValue="1")Integer num,
 			HttpServletRequest request, HttpServletResponse response) {
-		// 使用 ajax 请求设置 返回cookie
+		// 使用 ajax 请求设置
 		response.setHeader("Access-Control-Allow-Credentials", "true");
+		response.setHeader("Access-Control-Allow-Origin","http://localhost:8082");
 		TaotaoResult result = cartService.addCartItem(itemId, num, request, response);
-		CookieUtils.getCookieValue(request,"TT_CART");
 		String string="success";
 		String resultSucess= JsonUtils.objectToJson(string);
 		return resultSucess;
@@ -50,18 +48,19 @@ public class CartController {
 	public String showSuccess() {
 		return "cartSuccess";
 	}
-	
-	@RequestMapping("/myCart")
-	public String showCart(HttpServletRequest request, HttpServletResponse response, Model model) {
-		List<CartItem> list = cartService.getCartItemList(request, response);
-		model.addAttribute("cartList", list);
-		return "myCart";
-	}
 
-	@RequestMapping("/delete/{itemId}")
-	public String deleteCartItem(@PathVariable Long itemId, HttpServletRequest request, HttpServletResponse response) {
-		cartService.deleteCartItem(itemId, request, response);
-		return "redirect:/cart/cart.html";
+	//传入购物车商品里的id
+
+	@RequestMapping(value = "/getCartItemInfo",method= RequestMethod.POST, produces= MediaType.TEXT_HTML_VALUE+";charset=utf-8")
+	@ResponseBody
+	public String getCartItemInfo(String[] goodsId){
+		Long arrayId[] = new Long[goodsId.length];
+		for(int i=0;i<goodsId.length;i++) {
+			arrayId[i] = Long.parseLong(goodsId[i]);
+		}
+		List<CartItem> cartItemList=cartService.getCartItemInfo(arrayId);
+		String result=JsonUtils.objectToJson(cartItemList);
+		return result;
 	}
 
 }

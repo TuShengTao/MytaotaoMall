@@ -32,10 +32,10 @@ function addToCar($carUrl) {
 
 };
 function getGoodsId() {
-    $idNum=$id.substring(0,$id.indexOf('.'));
+    var $idNum=$id.substring(0,$id.indexOf('.'));
     return $idNum;// 返回商品id
 }
-//  判断商品是否存在于购物车 和 购物车是否存在 如果任意一个都不存在 把商品数量存在隐藏域 不加入cookie
+//  判断商品是否存在于购物车 和 购物车是否存在
 function goodsIfExit() {
     var $goodsInfo=$.cookie('TT_CART');
     var $goodId=getGoodsId();
@@ -73,3 +73,7 @@ function addNum($InputId) {
     var $GoodsNum=parseInt($($InputId).val())+1;
     $($InputId).val($GoodsNum);
 };
+// 点击 我的购物车 触发
+function goToMyCar() {
+    window.location.href="http://localhost:8082/superMarket/myCart.html";// 跳转到我的购物车页面
+}

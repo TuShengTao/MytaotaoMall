@@ -17,3 +17,6 @@ function turnToSearchJsp() {
     window.localStorage.removeItem('nowPage');
     window.location.href="http://localhost:8082/superMarket/search.html";
 }
+function goToMyCar() {
+    window.location.href="http://localhost:8082/superMarket/myCart.html";// 跳转到我的购物车页面
+}
