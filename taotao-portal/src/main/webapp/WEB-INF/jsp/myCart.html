@@ -567,7 +567,7 @@
 </div>
 <div class="cart-inner">
     <div class="cart-thead clearfix">
-        <div class="column t-checkbox form"><input data-cart="toggle-cb" name="toggle-checkboxes" id="toggle-checkboxes_up" type="checkbox" checked="" value=""><label for="toggle-checkboxes_up">全选</label></div>
+        <div class="column t-checkbox form"><input name="toggle-checkboxes" id="SelectAllCartItem" type="checkbox"><label for="SelectAllCartItem">全选</label></div>
         <div class="column t-goods">商品</div>
         <div class="column t-price">淘淘价</div>
         <div class="column t-promotion">优惠</div>
@@ -610,7 +610,7 @@
           <div class="cart-total-2014" id="toOrder">
               <div class="cart-button">
                   <span class="check-comm-btns" id="checkout-jd">
-                      <a class="checkout" href="/order/order-cart.html" clstag="clickcart|keycount|xincart|gotoOrderInfo" id="toSettlement">去结算<b></b></a>
+                      <a class="checkout" onclick="gotoOrderConfirm()" href="javascript:void(0);" clstag="clickcart|keycount|xincart|gotoOrderInfo" id="toSettlement">去结算<b></b></a>
                   </span>
                   <span class="combine-btns" style="display:none">
                         <span class="fore1" style="display: none;">

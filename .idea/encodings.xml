@@ -8,9 +8,10 @@
     <file url="file://$PROJECT_DIR$/taotao-manager/taotao-manager-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-manager/taotao-manager-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-order" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/taotao-order" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-parent" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-portal" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-portal/src/main/java/com/taotao/portal/controller/AlipayController.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/taotao-portal/src/main/java/com/taotao/portal/util/AlipayConfig.java" charset="GBK" />
     <file url="file://$PROJECT_DIR$/taotao-rest" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-search" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/taotao-sso" charset="UTF-8" />

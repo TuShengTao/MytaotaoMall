@@ -10,6 +10,9 @@ function goToMyCar() {
 $(document).ready(function () {
     var resultList=[];
     getCartItemInfo(resultList);//获取详细信息
+    localStorage.removeItem("ItemImageTitle"); // 把之前的删除
+    localStorage.removeItem("ItemToOrderId"); // 把之前的删除
+    localStorage.setItem("ItemImageTitle",JSON.stringify(resultList)); //把 购物车图片 title信息存入 在确认订单页面取
     console.log("输出结果list"+resultList[0].id);
     var $goodsList=$.cookie("TT_CART");
     $goodsList = $.parseJSON($goodsList);   //转化为 json对象
@@ -17,16 +20,16 @@ $(document).ready(function () {
     for(var i=0;i<$goodsList.length;i++){
        //   id  title num price image
         var $id=$goodsList[i].id;
-        var $title=resultList[i].title;//目前为空
+        var $title=resultList[i].title;
         var $num=$goodsList[i].num;
         var $price=$goodsList[i].price/100;
-        var $image=resultList[i].image;// 目前为空
+        var $image=resultList[i].image;
         var $inputIdNum='num'+$id; // 该商品数量 input的 id
         var $divId='div'+$id;// 该商品div的 id
 
         var $goodHtml='<div id="' + $divId + '" data-bind="rowid:1" class="item item_selected " xmlns="http://www.w3.org/1999/html">\n' +
             '\t\t        <div class="item_form clearfix">\n' +
-            '\t\t            <div class="cell p-checkbox"><input data-bind="cbid:1" class="checkbox" type="checkbox" name="checkItem" checked="" value="11345721-1"></div>\n' +
+            '\t\t            <div class="cell p-checkbox" ><input class="checkboxCartItem" type="checkbox"  name="checkItem" value="'+$id+'"></div>\n' +
             '\t\t            <div class="cell p-goods">\n' +
             '\t\t                <div class="p-img">\n' +
             '\t\t                \t<a href="/superMarket/item/'+$id+'.html" target="_blank">\n' +
@@ -125,7 +128,16 @@ function reduceNum($goodId,$inputId) {
     $($inputId).val($GoodNum);
     modifyNum($GoodNum,$goodId);// cookie 修改
     // 更新总价
-    allCarPrice();
+    // 更新总价
+    var $idList =$.parseJSON(localStorage.getItem("ItemToOrderId")); //
+    if ($idList.length>0){
+        for (var j = 0; j <$idList.length ; j++) {
+            if ($idList[j]==$goodId){
+                allCarPrice();
+                break;
+            }
+        }
+    }
 };
 //购物车详情页 添加数量
 function addNum($goodId,$inputId) {
@@ -134,7 +146,17 @@ function addNum($goodId,$inputId) {
     $($inputId).val($GoodsNum);
     modifyNum($GoodsNum,$goodId);// cookie 修改
     // 更新总价
-    allCarPrice();
+    var $idList =$.parseJSON(localStorage.getItem("ItemToOrderId")); //
+    console.log("添加商品数量输出id  "+$goodId);
+    if ($idList.length>0){
+        for (var j = 0; j <$idList.length ; j++) {
+            if ($idList[j]==parseInt($goodId)){
+                allCarPrice();
+                break;
+            }
+        }
+    }
+
 
 };
 //  购物车详情页 修改cookie 里的商品数量 传入一个数量 和修改此商品的id
@@ -162,15 +184,21 @@ function allCarPrice() {
     var $totalPrice=0;//购物车总价格
     var $goodsList=$.cookie("TT_CART");
     $goodsList = $.parseJSON($goodsList);   //转化为 json对象
-    var $tatalNum=$goodsList.length;// 购物车商品种类数量
     // 对 cookie 里的商品进行遍历
-    for(var i=0;i<$goodsList.length;i++){
-        //   id  title num price image
-        var $num=$goodsList[i].num;
-        var $price=$goodsList[i].price/100;
-        var $singlePrice=$num*$price;// 计算单个商品的所有价格
-        $totalPrice=$totalPrice+$singlePrice;
-    };
+    var $idList =$.parseJSON(localStorage.getItem("ItemToOrderId")); //
+    if ($idList.length>0){
+        for (var j = 0; j <$idList.length ; j++) {
+            for(var i=0;i<$goodsList.length;i++){
+                if ($idList[j]==$goodsList[i].id){
+                    //   id  title num price image
+                    var $num=$goodsList[i].num;
+                    var $price=$goodsList[i].price/100;
+                    var $singlePrice=$num*$price;// 计算单个商品的所有价格
+                    $totalPrice=$totalPrice+$singlePrice;
+                }
+            };
+        }
+    }
     var $carHtml='<div id="allprice" class="total fr">\n' +
         '                  总计（不含运费）：\n' +
         '                  <span class="totalSkuPrice">¥ '+$totalPrice+'</span>\n' +
@@ -179,6 +207,63 @@ function allCarPrice() {
     $('#toOrder').append($carHtml);
 
 };
+
+
+/*
+* 对购物车详情页的 checkbox 做事件监听 每一个商品对应CheckBox的值为商品的id 如果被选中 则取id 把 取到的id
+* 存入页面新建的localstorage 目的是跳转到订单结算确认页面时 把用户需要结算的商品加入进来，然后在确认订单页面取出 展示
+*/
+// 全选监听
+$(document).on('click','#SelectAllCartItem',function(){
+    if($(this).is(":checked")){
+        $('.checkboxCartItem').prop('checked',true);
+    }else{
+        $('.checkboxCartItem').prop('checked',false);
+    }
+    changeSelectedItemId();
+    // 更新价格
+    allCarPrice();
+});
+
+$(document).on('click','.checkboxCartItem',function(){
+    if ($(this).is(":checked")) {
+        $(this).prop('checked',true);
+        changeSelectedItemId();
+        // 更新价格
+        allCarPrice();
+    }else {
+        $(this).prop('checked',false);
+        changeSelectedItemId();
+        // 更新价格
+        allCarPrice();
+    }
+
+});
+function changeSelectedItemId() {
+    var $idList=[];
+    console.log("遍历复选框：");
+    $('.checkboxCartItem').each(function () {
+        if ($(this).prop('checked')){
+            $idList.push($(this).val()); // 把选中的商品id存入list
+        }
+    });
+    localStorage.removeItem("ItemImageTitle"); // 把之前的删除
+    localStorage.setItem("ItemToOrderId",JSON.stringify($idList)); //保存 要购买的商品id
+}
+function gotoOrderConfirm() {
+    window.location.href="http://localhost:8082/superMarket/orderConfirm.html"; // 跳转到订单确认页面
+
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

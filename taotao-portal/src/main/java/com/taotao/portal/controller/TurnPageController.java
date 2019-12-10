@@ -1,8 +1,12 @@
 package com.taotao.portal.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * Created on 2019/11/28
@@ -33,5 +37,10 @@ public class TurnPageController {
     public String showCart() {
         return "myCart";
     }
+    // 跳转到订单确认页面
 
+    @RequestMapping("/superMarket/orderConfirm")
+    public String showOrderCart() {
+        return "orderConfirm";
+    }
 }

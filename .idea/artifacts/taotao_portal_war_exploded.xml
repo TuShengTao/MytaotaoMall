@@ -47,6 +47,7 @@
           <element id="archive" name="taotao-manager-pojo-1.0-SNAPSHOT.jar">
             <element id="module-output" name="taotao-manager-pojo" />
           </element>
+          <element id="library" level="project" name="Maven: com.alipay.sdk:alipay-sdk-java:3.1.0" />
         </element>
       </element>
       <element id="directory" name="META-INF">
