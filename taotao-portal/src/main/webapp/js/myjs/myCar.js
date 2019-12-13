@@ -10,8 +10,8 @@ function goToMyCar() {
 $(document).ready(function () {
     var resultList=[];
     getCartItemInfo(resultList);//获取详细信息
-    localStorage.removeItem("ItemImageTitle"); // 把之前的删除
-    localStorage.removeItem("ItemToOrderId"); // 把之前的删除
+    // localStorage.removeItem("ItemImageTitle"); // 把之前的删除
+    // localStorage.removeItem("ItemToOrderId"); // 把之前的删除
     localStorage.setItem("ItemImageTitle",JSON.stringify(resultList)); //把 购物车图片 title信息存入 在确认订单页面取
     console.log("输出结果list"+resultList[0].id);
     var $goodsList=$.cookie("TT_CART");
@@ -128,7 +128,6 @@ function reduceNum($goodId,$inputId) {
     $($inputId).val($GoodNum);
     modifyNum($GoodNum,$goodId);// cookie 修改
     // 更新总价
-    // 更新总价
     var $idList =$.parseJSON(localStorage.getItem("ItemToOrderId")); //
     if ($idList.length>0){
         for (var j = 0; j <$idList.length ; j++) {
@@ -168,7 +167,7 @@ function modifyNum($goodNum,$goodId){
             if ($goodId == goodsJson[i].id) {
                 //修改商品数量
                 goodsJson[i].num = $goodNum;
-                $.cookie('TT_CART',null,{path:"/"});
+                // $.cookie('TT_CART',null,{path:"/"});
                 $.cookie('TT_CART', JSON.stringify(goodsJson),{path:"/"});// 再次写入cookie 必须加 {path:"/"} 这样才能保证只有一个TT_CART
                 var $goodsAfter = $.cookie('TT_CART'); // 控制台检测
                 var goodsAfterJson = $.parseJSON($goodsAfter);
@@ -184,7 +183,7 @@ function allCarPrice() {
     var $totalPrice=0;//购物车总价格
     var $goodsList=$.cookie("TT_CART");
     $goodsList = $.parseJSON($goodsList);   //转化为 json对象
-    // 对 cookie 里的商品进行遍历
+    // 对 cookie 里要加入订单的商品进行遍历
     var $idList =$.parseJSON(localStorage.getItem("ItemToOrderId")); //
     if ($idList.length>0){
         for (var j = 0; j <$idList.length ; j++) {
@@ -205,6 +204,9 @@ function allCarPrice() {
         '              </div>';
     $('#allprice').remove();
     $('#toOrder').append($carHtml);
+    // 设置总价格 在支付页面时调取
+    localStorage.removeItem("TAOTAO_ORDER_PRICE");
+    localStorage.setItem("TAOTAO_ORDER_PRICE",$totalPrice);// 设置总价
 
 };
 
@@ -247,11 +249,18 @@ function changeSelectedItemId() {
             $idList.push($(this).val()); // 把选中的商品id存入list
         }
     });
-    localStorage.removeItem("ItemImageTitle"); // 把之前的删除
+    localStorage.removeItem("ItemToOrderId"); // 把之前的删除
     localStorage.setItem("ItemToOrderId",JSON.stringify($idList)); //保存 要购买的商品id
+    console.log(localStorage.getItem("ItemToOrderId"));
 }
 function gotoOrderConfirm() {
-    window.location.href="http://localhost:8082/superMarket/orderConfirm.html"; // 跳转到订单确认页面
+    var $addToOrderIdList=$.parseJSON(localStorage.getItem("ItemToOrderId"));// 获取订单里的商品id
+    if($addToOrderIdList.length !=null || $addToOrderIdList.length >0 ){
+        window.location.href="http://localhost:8082/superMarket/orderConfirm.html"; // 跳转到订单确认页面
+    }else {
+        alert("请重新勾选要购买的商品！");
+    }
+
 
 }
 

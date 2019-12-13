@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class TurnPageController {
 
-
     //首页跳转到搜索页
 
     @RequestMapping("/superMarket/{pageName}")
@@ -42,5 +41,13 @@ public class TurnPageController {
     @RequestMapping("/superMarket/orderConfirm")
     public String showOrderCart() {
         return "orderConfirm";
+    }
+    @RequestMapping("/superMarket/orderSuccess")
+    public String orderSuccess() {
+        return "orderSuccess";
+    }
+    @RequestMapping("/superMarket/buySuccess")
+    public String buySuccess() {
+        return "buySuccess";
     }
 }

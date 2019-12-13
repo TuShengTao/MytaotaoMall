@@ -5,6 +5,7 @@ import com.taotao.pojo.TbUserExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
+
 public interface TbUserMapper {
     int countByExample(TbUserExample example);
 

@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.taotao.common.utils.JsonUtils;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,8 +32,6 @@ public class OrderController {
 	@Autowired
 	private OrderService orderService;
 
-
-
 	/**
 	 * @author: tushengtao
 	 * @date: 2019/12/10
@@ -42,25 +41,20 @@ public class OrderController {
 	 */
 	@RequestMapping(value = "/create",method = RequestMethod.POST)
 	@ResponseBody
-	public String createOrder(@RequestBody Order order, Model model, HttpServletRequest request) {
-
+	public String createOrder(@RequestBody Order order) {
 			// 测试
 			System.out.println(order.getOrderItems());
 //			//从Request中取用户信息
-//			TbUser user = (TbUser) request.getAttribute("user");
+			//TbUser user = (TbUser) request.getAttribute("user");
 //			//在order对象中补全用户信息
-//			order.setUserId(user.getId());
+		//	order.setUserId();
 //			order.setBuyerNick(user.getUsername());
-
-//			//调用服务
-//			String orderId = orderService.createOrder(order);
-
-//			model.addAttribute("orderId", orderId);
-//			model.addAttribute("payment", order.getPayment());
-//			model.addAttribute("date", new DateTime().plusDays(3).toString("yyyy-MM-dd"));
-
-			return "success";
-
+		  System.out.println("111111111111111111111111111111111111111111111111");
+		  System.out.println(order);
+			//调用服务
+			String orderId = orderService.createOrder(order);
+		    System.out.println(orderId);
+			// 返回订单
+			return orderId;
 	}
-	
 }
