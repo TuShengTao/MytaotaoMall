@@ -10,6 +10,7 @@ function goToMyCar() {
 $(document).ready(function () {
     var resultList=[];
     getCartItemInfo(resultList);//获取详细信息
+    localStorage.removeItem("TAOTAO_ORDER_PRICE");
     // localStorage.removeItem("ItemImageTitle"); // 把之前的删除
     // localStorage.removeItem("ItemToOrderId"); // 把之前的删除
     localStorage.setItem("ItemImageTitle",JSON.stringify(resultList)); //把 购物车图片 title信息存入 在确认订单页面取
@@ -105,10 +106,10 @@ function deleteGood($divId,$goodId) {
             // 删除该商品html 删除元素
             $($divId).remove();
 
-           $.removeCookie('TT_CART',{path:"/"});// 删除cookie,{path:"/"},
+           // $.removeCookie('TT_CART',{path:"/"});// 删除cookie,{path:"/"},
             //alert("删除cookie成功！");
             $.cookie('TT_CART',null,{path:"/"});
-            $.cookie('TT_CART', JSON.stringify(goodsJson),{path:"/"});// 再次写入cookie
+            $.cookie('TT_CART', JSON.stringify(goodsJson),{expires: 7,path:"/"});// 再次写入cookie
             console.log("删除该商品后的cookie是： " + $.cookie('TT_CART') );
             break; //删除完 退出循环
         }
@@ -168,7 +169,7 @@ function modifyNum($goodNum,$goodId){
                 //修改商品数量
                 goodsJson[i].num = $goodNum;
                 // $.cookie('TT_CART',null,{path:"/"});
-                $.cookie('TT_CART', JSON.stringify(goodsJson),{path:"/"});// 再次写入cookie 必须加 {path:"/"} 这样才能保证只有一个TT_CART
+                $.cookie('TT_CART', JSON.stringify(goodsJson),{expires: 7,path:"/"});// 再次写入cookie 必须加 {path:"/"} 这样才能保证只有一个TT_CART
                 var $goodsAfter = $.cookie('TT_CART'); // 控制台检测
                 var goodsAfterJson = $.parseJSON($goodsAfter);
                 console.log("修改后的商品数量是： " + goodsAfterJson[i].num + "   商品id是  " + goodsAfterJson[i].id);
@@ -179,6 +180,7 @@ function modifyNum($goodNum,$goodId){
 };
 // 计算购物车总价格，实现思路：在每次修改数量或者删除购物车商品时 动态修改总价格
 // 总价格 主要是获取cookie 里的商品信息
+allCarPrice();
 function allCarPrice() {
     var $totalPrice=0;//购物车总价格
     var $goodsList=$.cookie("TT_CART");

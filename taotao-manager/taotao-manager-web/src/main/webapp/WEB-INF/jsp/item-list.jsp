@@ -52,7 +52,7 @@
         		$.messager.alert('提示','只能选择一个商品!');
         		return ;
         	}
-        	
+        	// 编辑
         	$("#itemEditWindow").window({
         		onLoad :function(){
         			//回显数据 data是 获取选中的数据网格的数据

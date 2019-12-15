@@ -1,8 +1,4 @@
-// 支付思路
-// 点击购物车详情页面myCart.html的 (点击去结算按钮) 然后跳转到 order-cart.jsp订单确认页面 ，在此页面可以修改
-    //收货地址 数量 (点击确认订单，后台生成订单orderId) 然后跳转到 支付商品展示页面 展示订单号orderId/购买的商品信息,订单总价
-    // 此页面可以选择支付方式：
-    // 支付宝支付 点击后跳转到 支付宝支付页面 展示支付二维码 支付成功还有回调url跳转到 本地页面 buySuccess.html
+
 $(document).ready(function () {
     showAddOrderItem();
 });
@@ -35,7 +31,6 @@ function showAddOrderItem() {
     for (var i = 0; i <$orderItemsList.length ; i++) {
         for (var j = 0; j <$itemImageTitleList.length ; j++) {
             if ($orderItemsList[i].itemId==$itemImageTitleList[j].id) {
-                console.log("测试次数！")
                 $orderItemsList[i].image=$itemImageTitleList[j].image;
                 $orderItemsList[i].title=$itemImageTitleList[j].title;
             }
@@ -207,7 +202,7 @@ function createOrder() {
             data:JSON.stringify(order),// 向后台传入一个对象
             dataType: "json",                //数据返回类型，可以是xml、json等
             success: function (result) {      //成功，回调函数
-                if (result!=""){
+                if (result!="" && result !=null){
                     localStorage.setItem("TAOTAO_ORDER_ID",JSON.stringify(result)); //保存订单号
                     window.location.href = "http://localhost:8082/superMarket/orderSuccess.html";
                 } else {

@@ -57,7 +57,8 @@ public class OrderServiceImpl implements OrderService {
 		}
 		// redis 单线程生成 订单号 incr命令
 		long orderId = jedisClient.incr(ORDER_GEN_KEY);
-
+		System.out.println("66666666666666666666");
+		System.out.println(orderId);
 		//补全pojo的属性
 		order.setOrderId(orderId + "");
 		//状态：1、未付款，2、已付款，3、未发货，4、已发货，5、交易成功，6、交易关闭
