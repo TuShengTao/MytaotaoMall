@@ -13,7 +13,6 @@
             success : function(data){
                 if(data.status == 200){
                     var username = data.data.username;
-
                     localStorage.removeItem("TAOTAO_USERID");
                     // 存入 用户id
                     localStorage.setItem("TAOTAO_USERID",data.data.id);

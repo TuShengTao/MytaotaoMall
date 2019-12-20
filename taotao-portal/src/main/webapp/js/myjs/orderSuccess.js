@@ -3,6 +3,7 @@ $(document).ready(function () {
     var $orderId=localStorage.getItem("TAOTAO_ORDER_ID"); //获取订单号
     $("#successOrderId").html('订单号 ： '+$orderId);
 });
+
 function goToPay() {
     var $orderId=localStorage.getItem("TAOTAO_ORDER_ID"); //获取订单号
     var $totalPrice=localStorage.getItem("TAOTAO_ORDER_PRICE");// 获取总价

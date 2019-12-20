@@ -44,7 +44,33 @@ public class ContentController {
 		return result;
 	}
 
-	//内容管理模块 修改、删除、 未完成
+	//内容管理模块修改未完成
+	/**
+	 * @author: tushengtao
+	 * @date: 2019/12/16
+	 * @Description:  删除
+	 * @param:
+	 * @return:
+	 */
+	@RequestMapping("/delete")
+	@ResponseBody
+	public TaotaoResult deleteById(Long id){
+		int flag=contentService.deleteById(id);
+		return TaotaoResult.ok(flag);
+	}
+	/**
+	 * @author: tushengtao
+	 * @date: 2019/12/16
+	 * @Description:  修改 首页大广告 小广告等内容
+	 * @param:
+	 * @return:
+	 */
+	@RequestMapping("/update")
+	@ResponseBody
+	public TaotaoResult updateById(TbContent content){
+		int flag=contentService.updateById(content);
+		return TaotaoResult.ok(flag);
+	}
 
 
 }

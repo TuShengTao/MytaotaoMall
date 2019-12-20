@@ -17,7 +17,7 @@ import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.CookieUtils;
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbUserMapper;
-import com.taotao.pojo.TbUser;
+import com.taotao.sso.pojo.TbUser;
 import com.taotao.pojo.TbUserExample;
 import com.taotao.pojo.TbUserExample.Criteria;
 import com.taotao.sso.dao.JedisClient;
@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService {
 			criteria.andEmailEqualTo(content);
 		}
 		//执行查询
-		List<TbUser> list = userMapper.selectByExample(example);
+		List<com.taotao.pojo.TbUser> list = userMapper.selectByExample(example);
 		if (list == null || list.size() == 0) {
 			return TaotaoResult.ok(true);
 		}
@@ -97,13 +97,13 @@ public class UserServiceImpl implements UserService {
 
 		// 执行查询  private TbUserMapper userMapper;
 
-		List<TbUser> list = userMapper.selectByExample(example);
+		List<com.taotao.pojo.TbUser> list = userMapper.selectByExample(example);
 
 		//如果没有此用户名
 		if (null == list || list.size() == 0) {
 			return TaotaoResult.build(400, "用户名或密码错误");
 		}
-		TbUser user = list.get(0);
+		com.taotao.pojo.TbUser user = list.get(0);
 		//比对密码
 		if (!DigestUtils.md5DigestAsHex(password.getBytes()).equals(user.getPassword())) {
 			return TaotaoResult.build(400, "用户名或密码错误");

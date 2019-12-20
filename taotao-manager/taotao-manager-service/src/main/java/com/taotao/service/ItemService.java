@@ -23,5 +23,8 @@ public interface ItemService {
      * @return:
      */
     TaotaoResult createItem(TbItem item,String desc) throws Exception;
+    int deleteByPrimaryKey(Long id);
+    TaotaoResult getItemDesc(long itemId);
+
 
 }

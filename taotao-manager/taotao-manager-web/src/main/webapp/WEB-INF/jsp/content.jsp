@@ -89,14 +89,15 @@ var contentListToolbar = [{
     handler:function(){
     	var ids = TT.getSelectionsIds("#contentList");
     	if(ids.length == 0){
-    		$.messager.alert('提示','未选中商品!');
+    		$.messager.alert('提示','未选中!');
     		return ;
     	}
     	$.messager.confirm('确认','确定删除ID为 '+ids+' 的内容吗？',function(r){
     	    if (r){
-    	    	var params = {"ids":ids};
-            	$.post("/content/delete",params, function(data){
-        			if(data.status == 200){
+    	    	var params = {"id":ids};
+            	$.post("/content/delete",params, function(result){
+            	    alert(result);
+        			if(result.status == 200 && result.data==1){
         				$.messager.alert('提示','删除内容成功!',undefined,function(){
         					$("#contentList").datagrid("reload");
         				});

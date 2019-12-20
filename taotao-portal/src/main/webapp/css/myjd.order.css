@@ -250,7 +250,7 @@ html* .taborder .tyies-t {
 }
 
 .tcol1 {
-	width: 225px;
+	width: 200px;
 	color: #666
 }
 
@@ -274,10 +274,21 @@ html* .taborder .tyies-t {
 }
 
 .tcol1 {
-	width: 225px;
+	width: 200px;
 	color: #666
 }
-
+.goodstitle {
+	margin-left: 110px;
+	width: 60px;
+	color: #666;
+	font-size: 15px;
+}
+.goodsnumber {
+	margin-left: 110px;
+	width: 60px;
+	color: #666;
+	font-size: 15px;
+}
 .tcol2 {
 	color: #666;
 	margin: 0

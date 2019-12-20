@@ -42,12 +42,24 @@ public class TurnPageController {
     public String showOrderCart() {
         return "orderConfirm";
     }
+
     @RequestMapping("/superMarket/orderSuccess")
     public String orderSuccess() {
         return "orderSuccess";
     }
+
     @RequestMapping("/superMarket/buySuccess")
     public String buySuccess() {
         return "buySuccess";
+    }
+
+    @RequestMapping("/superMarket/myOrderCenter")
+    public String myOrderCenter() {
+        return "myOrderCenter";
+    }
+
+    @RequestMapping("/superMarket/myOrderComment")
+    public String myOrderComment() {
+        return "myOrderComment";
     }
 }

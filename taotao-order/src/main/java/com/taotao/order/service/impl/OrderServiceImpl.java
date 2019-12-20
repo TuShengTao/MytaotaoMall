@@ -3,6 +3,8 @@ package com.taotao.order.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.taotao.mapper.OrderMapper;
+import com.taotao.pojo.Order;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -29,7 +31,11 @@ import com.taotao.pojo.TbOrderShipping;
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
-	private TbOrderMapper orderMapper;
+	private TbOrderMapper tbOrderMapper;
+	// 自定义 order mapper  链接查询 订单表与订单详情商品表 1对多
+
+	@Autowired
+	private OrderMapper orderMapper;
 	@Autowired
 	private TbOrderItemMapper orderItemMapper;
 	@Autowired
@@ -43,8 +49,7 @@ public class OrderServiceImpl implements OrderService {
 	private String ORDER_INIT_ID;
 	@Value("${ORDER_DETAIL_GEN_KEY}")
 	private String ORDER_DETAIL_GEN_KEY;
-	
-	
+
 	@Override
 	public TaotaoResult createOrder(TbOrder order, List<TbOrderItem> itemList, TbOrderShipping orderShipping) {
 		//向订单表中插入记录
@@ -57,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
 		}
 		// redis 单线程生成 订单号 incr命令
 		long orderId = jedisClient.incr(ORDER_GEN_KEY);
-		System.out.println("66666666666666666666");
+		// 解决redis 持久化 快照问题 避免造成 主键重复
 		System.out.println(orderId);
 		//补全pojo的属性
 		order.setOrderId(orderId + "");
@@ -69,7 +74,7 @@ public class OrderServiceImpl implements OrderService {
 		//0：未评价 1：已评价
 		order.setBuyerRate(0);
 		//向订单表插入数据
-		orderMapper.insert(order);
+		tbOrderMapper.insert(order);
 		//插入订单明细
 		for (TbOrderItem tbOrderItem : itemList) {
 			//补全订单明细
@@ -88,6 +93,34 @@ public class OrderServiceImpl implements OrderService {
 		orderShippingMapper.insert(orderShipping);
 		
 		return TaotaoResult.ok(orderId);
+	}
+/**
+ * @author: tushengtao
+ * @date: 2019/12/18
+ * @Description:  订单表 与 订单详情表 连接查询
+ * @param: userID
+ * @return:
+ */
+	@Override
+	public List<Order> selectOrderByUid(TbOrder order) {
+
+		return orderMapper.selectOrderByUid(order);
+	}
+
+	@Override
+	public int deleteOrderById(TbOrder order) {
+
+		return tbOrderMapper.deleteByPrimaryKey(order.getOrderId());
+	}
+
+	@Override
+	public int deleteOrderShipById(TbOrder order) {
+		return orderShippingMapper.deleteByPrimaryKey(order.getOrderId());
+	}
+
+	@Override
+	public int updateOrderStatusById(TbOrder order) {
+		return tbOrderMapper.updateByPrimaryKeySelective(order);
 	}
 
 }

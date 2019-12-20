@@ -23,7 +23,7 @@
 	        </tr>
 	        <tr>
 	            <td>商品价格:</td>
-	            <td><input class="easyui-numberbox" type="text" name="priceView" data-options="min:1,max:99999999,precision:2,required:true" />
+	            <td><input class="easyui-numberbox" type="text" name="price" data-options="min:1,max:99999999,precision:2,required:true,formatter:TAOTAO.formatPrice" />
 	            	<input type="hidden" name="price"/>
 	            </td>
 	        </tr>
@@ -66,11 +66,11 @@
 </div>
 <script type="text/javascript">
 	var itemEditEditor ;
-	$(function(){
-		//实例化编辑器
-		itemEditEditor = TAOTAO.createEditor("#itemeEditForm [name=desc]");
-	});
-	
+	// $(function(){
+	// 	//实例化编辑器
+	// 	itemEditEditor = TAOTAO.createEditor("#itemeEditForm [name=desc]");
+	// });
+	//
 	function submitForm(){
 		if(!$('#itemeEditForm').form('validate')){
 			$.messager.alert('提示','表单还未填写完成!');
@@ -100,7 +100,7 @@
 		
 		$("#itemeEditForm [name=itemParams]").val(paramJson);
 		
-		$.post("/rest/item/update",$("#itemeEditForm").serialize(), function(data){
+		$.post("/item/update",$("#itemeEditForm").serialize(), function(data){
 			if(data.status == 200){
 				$.messager.alert('提示','修改商品成功!','info',function(){
 					$("#itemEditWindow").window('close');

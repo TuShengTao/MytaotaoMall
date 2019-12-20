@@ -36,10 +36,16 @@ public class ItemController {
 		TbItem tbItem = itemService.getItemById(itemId);
 		return tbItem;
 	}
-	@RequestMapping("/item/list")
+	@RequestMapping(value = "/item/list")
 	@ResponseBody
 	public EUDataGridResult getItemList(Integer page, Integer rows) {
 		EUDataGridResult result = itemService.getItemList(page, rows);
+		return result;
+	}
+	@RequestMapping("/desc/{itemId}")
+	@ResponseBody
+	public TaotaoResult getItemDesc(@PathVariable Long itemId) {
+		TaotaoResult result = itemService.getItemDesc(itemId);
 		return result;
 	}
 	@RequestMapping(value="/item/save", method=RequestMethod.POST)
@@ -55,4 +61,12 @@ public class ItemController {
 		TaotaoResult result = itemService.createItem(item,desc);
 		return result;
 	}
+	@RequestMapping(value = "/item/delete",method = RequestMethod.POST)
+	@ResponseBody
+	private String deleteById(Long ids){
+		int flag=itemService.deleteByPrimaryKey(ids);
+		// 返回 为1
+		return String.valueOf(flag);
+	}
+
 }

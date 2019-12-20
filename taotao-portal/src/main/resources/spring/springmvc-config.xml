@@ -18,20 +18,18 @@
 	</bean>
 	<mvc:default-servlet-handler />
 
-	<!-- 拦截器配置 -->
-	<!--<mvc:interceptors>-->
-		<!--<mvc:interceptor>-->
-			<!--&lt;!&ndash; 拦截订单类请求 &ndash;&gt;-->
-			<!--<mvc:mapping path="/order/**"/>-->
-			<!--<bean class="com.taotao.portal.interceptor.LoginInterceptor"/>-->
-		<!--</mvc:interceptor>-->
-	<!--</mvc:interceptors>-->
 
-	<!--  拦截器测试！ -->
+
+	<!--  拦截器！ -->
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<!-- 拦截订单类请求 订单系统未完成 先测试item -->
-			<mvc:mapping path="/superMarket/item//**"/>
+			<!-- 拦截请求购物车  -->
+			<mvc:mapping path="/superMarket/myCart.html"/>
+			<bean class="com.taotao.portal.interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<!-- 拦截请求 订单中心  -->
+			<mvc:mapping path="/superMarket/myOrderCenter.html"/>
 			<bean class="com.taotao.portal.interceptor.LoginInterceptor"/>
 		</mvc:interceptor>
 	</mvc:interceptors>

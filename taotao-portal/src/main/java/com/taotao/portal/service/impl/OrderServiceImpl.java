@@ -1,5 +1,6 @@
 package com.taotao.portal.service.impl;
 
+import com.taotao.pojo.TbOrder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,9 @@ import com.taotao.common.utils.HttpClientUtil;
 import com.taotao.common.utils.JsonUtils;
 import com.taotao.portal.pojo.Order;
 import com.taotao.portal.service.OrderService;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: tushengtao
@@ -23,7 +27,15 @@ public class OrderServiceImpl implements OrderService {
 	private String ORDER_BASE_URL;
 	@Value("${ORDER_CREATE_URL}")
 	private String ORDER_CREATE_URL;
-	
+
+	@Value("${ORDER_SELECTBYUID_URL}")
+	private String ORDER_SELECTBYUID_URL;
+
+	@Value("${ORDER_DELETEBYID_URL}")
+	private String ORDER_DELETEBYID_URL;
+
+	@Value("${ORDER_UPDATESTATUSBYID_URL}")
+	private String ORDER_UPDATESTATUSBYID_URL;
 
 	@Override
 	public String createOrder(Order order) {
@@ -41,4 +53,23 @@ public class OrderServiceImpl implements OrderService {
 		return "";
 	}
 
+	@Override
+	public String selectOrderByUid(TbOrder order) {
+		//调用taotao-order的服务提交订单。
+		String json = HttpClientUtil.doPostJson(ORDER_BASE_URL +ORDER_SELECTBYUID_URL, JsonUtils.objectToJson(order));
+
+		return json;
+	}
+
+	@Override
+	public String deleteOrderById(TbOrder order) {
+		String json=HttpClientUtil.doGet(ORDER_BASE_URL+ORDER_DELETEBYID_URL+"?orderId="+order.getOrderId());
+		return json;
+	}
+
+	@Override
+	public String updateOrderStatus(String orderId, int status) {
+		String json=HttpClientUtil.doGet(ORDER_BASE_URL+ORDER_UPDATESTATUSBYID_URL+"?orderId="+orderId+"&status="+status);
+		return json;
+	}
 }

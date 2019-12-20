@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page trimDirectiveWhitespaces="true" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,7 +25,7 @@
 			</div>
             <div class="form ">
                 <div class="item fore1">
-                    <span>用户名</span>
+                    <span><spring:message code="userName"></spring:message></span>
                     <div class="item-ifo">
                         <input type="text" id="loginname" name="username" class="text"  tabindex="1" autocomplete="off"/>
                         <div class="i-name ico"></div>
@@ -40,7 +42,7 @@
                 </script>
                 <div id="capslock"><i></i><s></s>键盘大写锁定已打开，请注意大小写</div>
                 <div class="item fore2">
-                    <span>密码</span>
+                    <span><spring:message code="password"></spring:message></span>
                     <div class="item-ifo">
                         <input type="password" id="nloginpwd" name="password" class="text" tabindex="2" autocomplete="off"/>
                         <div class="i-pass ico"></div>
@@ -49,12 +51,12 @@
                     </div>
                 </div>
                 <div class="item login-btn2013">
-                    <input type="button" class="btn-img btn-entry" id="loginsubmit" value="登录" tabindex="8" clstag="passport|keycount|login|06"/>
+                    <input type="button" class="btn-img btn-entry" id="loginsubmit" value="<spring:message code="login"></spring:message>" tabindex="8" clstag="passport|keycount|login|06"/>
                 </div>
             </div>
         </div>
         <div class="free-regist">
-            <span><a href="/page/register" clstag="passport|keycount|login|08">免费注册&gt;&gt;</a></span>
+            <span><a href="/page/register" clstag="passport|keycount|login|08"><spring:message code="freeRegister"></spring:message>&gt;&gt;</a></span>
         </div>
     </div>
 </form>

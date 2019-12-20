@@ -1,5 +1,6 @@
 package com.taotao.pojo;
 
+
 import java.util.Date;
 
 /**
@@ -25,11 +26,13 @@ public class TbUser {
     /**
      * 注册手机号
      */
+
     private String phone;
 
     /**
      * 注册邮箱
      */
+
     private String email;
 
     private Date created;

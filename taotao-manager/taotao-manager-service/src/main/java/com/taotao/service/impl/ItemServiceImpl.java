@@ -5,12 +5,14 @@ import com.github.pagehelper.PageInfo;
 import com.taotao.common.pojo.EUDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
 import com.taotao.common.utils.IDUtils;
+import com.taotao.common.utils.JsonUtils;
 import com.taotao.mapper.TbItemDescMapper;
 import com.taotao.mapper.TbItemMapper;
 import com.taotao.pojo.TbItem;
 import com.taotao.pojo.TbItemDesc;
 import com.taotao.pojo.TbItemExample;
 import com.taotao.service.ItemService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +75,19 @@ public class ItemServiceImpl implements ItemService {
         return TaotaoResult.ok();
     }
 
+    @Override
+    public int deleteByPrimaryKey(Long id) {
+        int result=0;
+        // 删除商品表的商品
+        int flag_item=itemMapper.deleteByPrimaryKey(id);
+        // 删除商品描述表的商品描述
+        int flag_desc=itemDescMapper.deleteByPrimaryKey(id);
+        if (flag_desc ==1 || flag_item ==1){
+            result=1;
+        }
+        return result;
+    }
+
     private TaotaoResult insertItemDesc(Long itemId,String desc){
         /**
          * @author: tushengtao
@@ -89,5 +104,10 @@ public class ItemServiceImpl implements ItemService {
         itemDesc.setUpdated(new Date());
         itemDescMapper.insert(itemDesc);
         return TaotaoResult.ok();
+    }
+    @Override
+    public TaotaoResult getItemDesc(long itemId) {
+        TbItemDesc itemDesc = itemDescMapper.selectByPrimaryKey(itemId);
+        return TaotaoResult.ok(itemDesc);
     }
 }

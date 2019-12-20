@@ -3,7 +3,7 @@
 	 <ul id="contentCategory" class="easyui-tree">
     </ul>
 </div>
-<div id="contentCategoryMenu" class="easyui-menu" style="width:120px;" data-options="onClick:menuHandler">
+<div id="contentCategoryMenu" class="easyui-menu" data-options="onClick:menuHandler" style="width:120px;" >
     <div data-options="iconCls:'icon-add',name:'add'">添加</div>
     <div data-options="iconCls:'icon-remove',name:'rename'">重命名</div>
     <div class="menu-sep"></div>
@@ -42,7 +42,10 @@ $(function(){
         	}
         }
 	});
+
+
 });
+//
 function menuHandler(item){
 	var tree = $("#contentCategory");
 	var node = tree.tree("getSelected");

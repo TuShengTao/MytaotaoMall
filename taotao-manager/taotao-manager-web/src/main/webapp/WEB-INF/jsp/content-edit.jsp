@@ -60,15 +60,9 @@ $(function(){
 
 var contentEditPage = {
 		submitForm : function(){
-			if(!$('#contentEditForm').form('validate')){
-				$.messager.alert('提示','表单还未填写完成!');
-				return ;
-			}
-			contentEditEditor.sync();
-			
-			$.post("/rest/content/edit",$("#contentEditForm").serialize(), function(data){
-				if(data.status == 200){
-					$.messager.alert('提示','新增内容成功!');
+			$.post("/content/update",$("#contentEditForm").serialize(), function(data){
+				if(data.status == 200 && data.data==1){
+					$.messager.alert('提示','修改内容成功!');
 					$("#contentList").datagrid("reload");
 					TT.closeCurrentWindow();
 				}

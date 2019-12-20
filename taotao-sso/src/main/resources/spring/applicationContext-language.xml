@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 配置Spring国际化信息  -->
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="resource/messages/message"></property>
+        <!-- 支持UTF-8的中文 -->
+        <property name="cacheSeconds" value="0"/>
+        <property name="defaultEncoding" value="UTF-8"/>
+    </bean>
+    <bean id="CookieLocaleResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    <property name="cookieMaxAge" value="604800"></property>
+    <property name="defaultLocale" value="zh_CN"></property>
+    <property name="cookieName" value="language"></property>
+    </bean>
+
+</beans>

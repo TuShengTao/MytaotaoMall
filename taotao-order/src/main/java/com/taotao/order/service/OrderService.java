@@ -3,6 +3,7 @@ package com.taotao.order.service;
 import java.util.List;
 
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.pojo.Order;
 import com.taotao.pojo.TbOrder;
 import com.taotao.pojo.TbOrderItem;
 import com.taotao.pojo.TbOrderShipping;
@@ -10,4 +11,8 @@ import com.taotao.pojo.TbOrderShipping;
 public interface OrderService {
 
 	TaotaoResult createOrder(TbOrder order, List<TbOrderItem> itemList, TbOrderShipping orderShipping);
+	List<Order>  selectOrderByUid(TbOrder order);
+	int deleteOrderById(TbOrder order);
+	int deleteOrderShipById(TbOrder order);
+	int updateOrderStatusById(TbOrder order);
 }

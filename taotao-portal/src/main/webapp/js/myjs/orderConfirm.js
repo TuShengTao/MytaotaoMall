@@ -7,8 +7,12 @@ function showAddOrderItem() {
     var $addToOrderIdList=$.parseJSON(localStorage.getItem("ItemToOrderId"));// 获取订单里的商品id
     var $totalPrice=localStorage.getItem("TAOTAO_ORDER_PRICE"); // 订单总价
     var $itemImageTitleList=$.parseJSON(localStorage.getItem("ItemImageTitle"));// 商品 图片 title 不需要加入订单
-    var $userId= localStorage.getItem("TAOTAO_USERID");// 用户id
     var $cookOrderItems=$.cookie('TT_CART');
+
+    console.log("输出测试图片 title");
+    console.log($itemImageTitleList);
+    console.log("输出测试listorder");
+    console.log($addToOrderIdList);
     $cookOrderItems = $.parseJSON($cookOrderItems);// 购物车 获取价格 和购买的数量
     var $orderItemsList=[]; // 保存购买商品的数组
     // 循环加入 orderItemsList[]  包含 image title
@@ -98,64 +102,64 @@ function showAddOrderItem() {
 
 }
 // 增加地址
-function addAddress() {
-    var address=[];
-
-    var addressObject=new Object();
-    addressObject.phone=12344543456;
-    addressObject.address="宁波市学院路999号";
-    addressObject.receiver="罗丹";
-    var stringAd1=addressObject;
-
-    address.push(stringAd1);
-
-    addressObject.phone=88888888888;
-    addressObject.address="宁波市学院路888号";
-    addressObject.receiver="屠圣涛";
-    var stringAd2=addressObject;
-
-    address.push(stringAd2);
-    console.log(address);
-
-    var $addToOrderIdList=$.parseJSON(localStorage.getItem("ItemToOrderId"));// 保存订单里的商品id
-    var $totalPrice=localStorage.getItem("TAOTAO_ORDER_PRICE"); // 订单总价
-    var $itemImageTitleList=localStorage.getItem("ItemImageTitle");// 商品 图片 title 不需要的
-    var $userId= localStorage.getItem("TAOTAO_USERID");// 用户id
-    var $cookOrderItems = $.parseJSON($.cookie('TT_CART'));// 购物车 获取价格 和购买的数量
-
-
-}
+// function addAddress() {
+//     var address=[];
+//
+//     var addressObject=new Object();
+//     addressObject.phone=12344543456;
+//     addressObject.address="宁波市学院路999号";
+//     addressObject.receiver="罗丹";
+//     var stringAd1=addressObject;
+//
+//     address.push(stringAd1);
+//
+//     addressObject.phone=88888888888;
+//     addressObject.address="宁波市学院路888号";
+//     addressObject.receiver="屠圣涛";
+//     var stringAd2=addressObject;
+//
+//     address.push(stringAd2);
+//     console.log(address);
+//
+//     var $addToOrderIdList=$.parseJSON(localStorage.getItem("ItemToOrderId"));// 保存订单里的商品id
+//     var $totalPrice=localStorage.getItem("TAOTAO_ORDER_PRICE"); // 订单总价
+//     var $itemImageTitleList=localStorage.getItem("ItemImageTitle");// 商品 图片 title 不需要的
+//     var $userId= localStorage.getItem("TAOTAO_USERID");// 用户id
+//     var $cookOrderItems = $.parseJSON($.cookie('TT_CART'));// 购物车 获取价格 和购买的数量
+//
+//
+// }
 // 显示地址
-function showAddress() {
-    var $userId= parseInt(localStorage.getItem("TAOTAO_USERID"));
-    $.ajax({
-        url:"http://localhost:8082/user/address.html",
-        type: "GET",
-        data:{
-            id:$userId
-        },
-        async:false, // 使用ajax的同步，默认是异步
-        dataType: "json",
-        //  traditional: true,//这里设置为true 否则数组传入不进后台
-        success: function (result) {
-            console.log("输出用户所有的收货地址：");
-            localStorage.removeItem("USER_ADDRESS");
-            localStorage.setItem("USER_ADDRESS",result.address);// 存入收货地址 如果用户要添加收货时从里面取
-            console.log(result);
-            console.log($.parseJSON(result.address)[0].receiver);
-
-        },
-        error: function () {            //失败，回调函数
-            alert("添加收货地址信息失败！服务器错误！");
-        }
-    });
-}
+// function showAddress() {
+//     var $userId= parseInt(localStorage.getItem("TAOTAO_USERID"));
+//     $.ajax({
+//         url:"http://localhost:8082/user/address.html",
+//         type: "GET",
+//         data:{
+//             id:$userId
+//         },
+//         async:false, // 使用ajax的同步，默认是异步
+//         dataType: "json",
+//         //  traditional: true,//这里设置为true 否则数组传入不进后台
+//         success: function (result) {
+//             console.log("输出用户所有的收货地址：");
+//             localStorage.removeItem("USER_ADDRESS");
+//             localStorage.setItem("USER_ADDRESS",result.address);// 存入收货地址 如果用户要添加收货时从里面取
+//             console.log(result);
+//             console.log($.parseJSON(result.address)[0].receiver);
+//
+//         },
+//         error: function () {            //失败，回调函数
+//             alert("添加收货地址信息失败！服务器错误！");
+//         }
+//     });
+// }
 
 // 点击确认订单  跳转到订单创建成功 跳转到 orderSuccess.html
 function createOrder() {
     var $addToOrderIdList=$.parseJSON(localStorage.getItem("ItemToOrderId"));// 保存订单里的商品id
     var $totalPrice=localStorage.getItem("TAOTAO_ORDER_PRICE"); // 订单总价
-    var $itemImageTitleList=localStorage.getItem("ItemImageTitle");// 商品 图片 title 不需要的
+    var $itemImageTitleList=$.parseJSON(localStorage.getItem("ItemImageTitle"));// 商品:图片 title
     var $userId= localStorage.getItem("TAOTAO_USERID");// 用户id
     var $cookOrderItems = $.parseJSON($.cookie('TT_CART'));// 购物车 获取价格 和购买的数量
 
@@ -168,13 +172,15 @@ function createOrder() {
                     "itemId":$cookOrderItems[j].id,
                     "num": $cookOrderItems[j].num,
                     "price":$cookOrderItems[j].price/100,
-                    "totalFee":$cookOrderItems[j].num * $cookOrderItems[j].price/100
+                    "totalFee":$cookOrderItems[j].num * $cookOrderItems[j].price/100,
+                    "title":$itemImageTitleList[i].title,
+                    "picPath":$itemImageTitleList[i].image
                 };
                 $orderItemsList.push($buyItemInfo);
             }
         }
     }
-    console.log($orderItemsList);
+
     // 传入后台order 数据格式
     var order={
         "payment": $totalPrice,
@@ -194,7 +200,8 @@ function createOrder() {
             "receiverZip": "200000"
         }
     };
-    // if ($userId != null && $userId !="" && $buyList !=null && $buyList!=""){
+
+
         $.ajax({
             url:"http://localhost:8082/order/create.html",
             type: "POST",
@@ -215,9 +222,6 @@ function createOrder() {
             }
         });
 
-    // } else {
-    //     alert("请先登录！");
-    // }
 
 }
 

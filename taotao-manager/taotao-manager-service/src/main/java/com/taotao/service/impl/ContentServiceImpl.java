@@ -56,6 +56,24 @@ public class ContentServiceImpl implements ContentService {
 	}
 
 	@Override
+	public int deleteById(Long id) {
+		int flag=contentMapper.deleteByPrimaryKey(id);
+		return flag;
+	}
+/**
+ * @author: tushengtao
+ * @date: 2019/12/16
+ * @Description:  修改首页内容 如 广告轮播图 大广告 小广告
+ * @param:
+ * @return:
+ */
+	@Override
+	public int updateById(TbContent content) {
+		int flag=contentMapper.updateByPrimaryKey(content);
+		return flag;
+	}
+
+	@Override
 	public EUDataGridResult selectContentById(int page,int rows,Long categoryId) {
 		//查询内容列表
 		TbContentExample example=new TbContentExample();

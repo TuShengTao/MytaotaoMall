@@ -17,8 +17,12 @@
         </tr>
     </thead>
 </table>
-<div id="itemEditWindow" class="easyui-window" title="编辑商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/rest/page/item-edit'" style="width:80%;height:80%;padding:10px;">
-</div>
+<%--<div id="itemEditWindow" class="easyui-window" title="编辑商品" data-options="modal:true,closed:true,iconCls:'icon-save',href:'/rest/page/item-edit'" style="width:80%;height:80%;padding:10px;">--%>
+<%--<div id="itemEditWindow" class="easyui-window" title="编辑商品" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:80%;height:80%;padding:10px;">--%>
+
+
+
+    </div>
 
 <script>
     //common.js 里也有此函数
@@ -43,69 +47,83 @@
         text:'编辑',
         iconCls:'icon-edit',
         handler:function(){
-        	var ids = getSelectionsIds();
-        	if(ids.length == 0){
-        		$.messager.alert('提示','必须选择一个商品才能编辑!');
-        		return ;
-        	}
-        	if(ids.indexOf(',') > 0){
-        		$.messager.alert('提示','只能选择一个商品!');
-        		return ;
-        	}
-        	// 编辑
-        	$("#itemEditWindow").window({
-        		onLoad :function(){
-        			//回显数据 data是 获取选中的数据网格的数据
-        			var data = $("#itemList").datagrid("getSelections")[0];
-        			data.priceView = TAOTAO.formatPrice(data.price);
-        			$("#itemeEditForm").form("load",data);
-        			
-        			// 加载商品描述 _data是 ajax请求完成后返回的数据
-        			$.getJSON('/rest/item/query/item/desc/'+data.id,function(_data){
-        				if(_data.status == 200){
-        					//UM.getEditor('itemeEditDescEditor').setContent(_data.data.itemDesc, false);
-        					itemEditEditor.html(_data.data.itemDesc);
-        				}
-        			});
-        			
-        			//加载商品规格
-        			$.getJSON('/rest/item/param/item/query/'+data.id,function(_data){
-        				if(_data && _data.status == 200 && _data.data && _data.data.paramData){
-        					$("#itemeEditForm .params").show();
-        					$("#itemeEditForm [name=itemParams]").val(_data.data.paramData);
-        					$("#itemeEditForm [name=itemParamId]").val(_data.data.id);
-        					
-        					//回显商品规格
-        					 var paramData = JSON.parse(_data.data.paramData);
-        					
-        					 var html = "<ul>";
-        					 for(var i in paramData){
-        						 var pd = paramData[i];
-        						 html+="<li><table>";
-        						 html+="<tr><td colspan=\"2\" class=\"group\">"+pd.group+"</td></tr>";
-        						 
-        						 for(var j in pd.params){
-        							 var ps = pd.params[j];
-        							 html+="<tr><td class=\"param\"><span>"+ps.k+"</span>: </td><td><input autocomplete=\"off\" type=\"text\" value='"+ps.v+"'/></td></tr>";
-        						 }
-        						 
-        						 html+="</li></table>";
-        					 }
-        					 html+= "</ul>";
-        					 $("#itemeEditForm .params td").eq(1).html(html);
-        				}
-        			});
-        			//调用初始化函数目前没用
-                 TAOTAO.init({
+            var ids = getSelectionsIds();
+            if(ids.length == 0){
+                $.messager.alert('提示','必须选择一个商品才能编辑!');
+                return ;
+            }
+            if(ids.indexOf(',') > 0){
+                $.messager.alert('提示','只能选择一个商品!');
+                return ;
+            }
+            TT.createWindow({
+                url : "/item-edit",
+                onLoad : function(){
+                    var itemEditEditor ;
+                    //实例化编辑器
+                    itemEditEditor = KindEditor.create("#itemEditEditor [name=desc]", TT.kingEditorParams);
+                    //回显数据 data是 获取选中的数据网格的数据
+                    var data = $("#itemList").datagrid("getSelections")[0];
+                    data.priceView = TAOTAO.formatPrice(data.price);
+                    $("#itemeEditForm").form("load",data);
+                    // 加载商品描述 _data是 ajax请求完成后返回的数据
+                    $.getJSON('/item/desc/'+data.id,function(_data){
+                        if(_data.status == 200){
+                            UM.getEditor('ittDescEdiemeEditor').setContent(_data.data.itemDesc, false);
+                            itemEditEditor.html(_data.data.itemDesc);
+                        }
+                    });
+                    // 加载商品规格
+                    $.getJSON('/item/param/item/query/'+data.id,function(_data){
+                    	if(_data && _data.status == 200 && _data.data && _data.data.paramData){
+                    		$("#itemeEditForm .params").show();
+                    		$("#itemeEditForm [name=itemParams]").val(_data.data.paramData);
+                    		$("#itemeEditForm [name=itemParamId]").val(_data.data.id);
+
+                    		//回显商品规格
+                    		 var paramData = JSON.parse(_data.data.paramData);
+
+                    		 var html = "<ul>";
+                    		 for(var i in paramData){
+                    			 var pd = paramData[i];
+                    			 html+="<li><table>";
+                    			 html+="<tr><td colspan=\"2\" class=\"group\">"+pd.group+"</td></tr>";
+
+                    			 for(var j in pd.params){
+                    				 var ps = pd.params[j];
+                    				 html+="<tr><td class=\"param\"><span>"+ps.k+"</span>: </td><td><input autocomplete=\"off\" type=\"text\" value='"+ps.v+"'/></td></tr>";
+                    			 }
+
+                    			 html+="</li></table>";
+                    		 }
+                    		 html+= "</ul>";
+                    		 $("#itemeEditForm .params td").eq(1).html(html);
+                    	}
+                    });
+                    //调用初始化函数目前没用
+                    TAOTAO.init({
                         "pics" : data.image,
                         "cid" : data.cid,
                         fun:function(node){
                             TAOTAO.changeItemParam(node, "itemeEditForm");
                         }
-                 });
+                    });
 
-        		}
-        	}).window("open");
+                    // var data = $("#itemList").datagrid("getSelections")[0];
+                    // $("#itemeEditForm").form("load",data);
+                    //
+                    // // 实现图片
+                    // if(data.pic){
+                    //     $("#contentEditForm [name=pic]").after("<a href='"+data.pic+"' target='_blank'><img src='"+data.pic+"' width='80' height='50'/></a>");
+                    // }
+                    // if(data.pic2){
+                    //     $("#contentEditForm [name=pic2]").after("<a href='"+data.pic2+"' target='_blank'><img src='"+data.pic2+"' width='80' height='50'/></a>");
+                    // }
+                    //
+                    // contentEditEditor.html(data.content);
+                }
+            });
+
         }
     },{
         text:'删除',
@@ -119,8 +137,9 @@
         	$.messager.confirm('确认','确定删除ID为 '+ids+' 的商品吗？',function(r){
         	    if (r){
         	    	var params = {"ids":ids};
-                	$.post("/rest/item/delete",params, function(data){
-            			if(data.status == 200){
+                	$.post("/item/delete",params, function(data){
+                	    alert(data);
+            			if(data=="1" || data ==1){
             				$.messager.alert('提示','删除商品成功!',undefined,function(){
             					$("#itemList").datagrid("reload");
             				});

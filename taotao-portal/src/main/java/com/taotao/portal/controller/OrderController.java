@@ -6,8 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.taotao.common.utils.JsonUtils;
+import com.taotao.pojo.TbOrder;
+import com.taotao.portal.pojo.TaotaoResult;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,19 +45,39 @@ public class OrderController {
 	@RequestMapping(value = "/create",method = RequestMethod.POST)
 	@ResponseBody
 	public String createOrder(@RequestBody Order order) {
-			// 测试
-			System.out.println(order.getOrderItems());
-//			//从Request中取用户信息
-			//TbUser user = (TbUser) request.getAttribute("user");
-//			//在order对象中补全用户信息
-		//	order.setUserId();
-//			order.setBuyerNick(user.getUsername());
-		  System.out.println("111111111111111111111111111111111111111111111111");
-		  System.out.println(order);
-			//调用服务
 			String orderId = orderService.createOrder(order);
 		    System.out.println(orderId);
 			// 返回订单
 			return orderId;
 	}
+	/**
+	 * @author: tushengtao
+	 * @date: 2019/12/18
+	 * @Description:  根据用户id: userId 查询订单，前台传入 uid
+	 * @param:
+	 * @return:
+	 */
+	@RequestMapping(value = "/select",produces= MediaType.TEXT_HTML_VALUE+";charset=utf-8")
+	@ResponseBody
+	public String selectByUid(String userId){
+		Long userIdLong=Long.parseLong(userId);
+		TbOrder order=new TbOrder();
+		order.setUserId(userIdLong);
+		String result=orderService.selectOrderByUid(order);
+		return result;
+	}
+
+	@RequestMapping("/delete")
+	@ResponseBody
+	public TaotaoResult deleteById(TbOrder order){
+		String result=orderService.deleteOrderById(order);
+		return TaotaoResult.ok(result);
+	}
+	@RequestMapping("/updateOrderStatus")
+	@ResponseBody
+	public String updateOrderStatus(String orderId,int status){
+		String result=orderService.updateOrderStatus(orderId,status);
+		return result;
+	}
+
 }

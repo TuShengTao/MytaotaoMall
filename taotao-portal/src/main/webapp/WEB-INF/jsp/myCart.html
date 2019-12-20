@@ -115,7 +115,7 @@
 
                     <div class="cun">
 
-                        <a href="">我的订单</a>
+                        <a href="javascript:void(0);" onclick="goTomyOrderCenter()">我的订单</a>
 
                     </div>
 
@@ -312,8 +312,8 @@
     <div class="sou">
 
         <div class="sousuo">
-            <!--<%&#45;&#45; 搜索的关键字searchKey 在第一次点击搜索时 ajax请求成功时 success方法下面 再设置一下值searchKey；-->
-			<!--否则在search.jsp无法实现上一页 和 下一页 &#45;&#45;%>-->
+            <!--搜索的关键字searchKey 在第一次点击搜索时 ajax请求成功时 success方法下面 再设置一下值searchKey；-->
+            <!--否则在search.jsp无法实现上一页 和 下一页 -->
             <input id="searchInput" type="text" class="kuang" style="color:#999;font-size:14px" />
             <div class="souzi"><a id="searchButton" onclick=" turnToSearchJsp()" href="javascript:void(0);">搜索</a></div>
 
@@ -347,7 +347,7 @@
 
         <div class="mytu"></div>
 
-        <a href="">我的惠淘淘</a>
+        <a href="javascript:void(0);" id="testHtml" >我的惠淘淘</a>
 
         <div class="jiantou"></div>
 
@@ -452,7 +452,6 @@
     <div class="jubao"></div>
 
 </div>
-
 <!-- 搜索区域结束 -->
 
 <!-- 导航条区域开始 -->
