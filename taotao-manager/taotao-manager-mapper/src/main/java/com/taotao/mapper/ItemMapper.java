@@ -1,6 +1,7 @@
-package com.taotao.search.mapper;
+package com.taotao.mapper;
 
-import com.taotao.search.pojo.Item;
+import com.taotao.pojo.Item;
+
 
 import java.util.List;
 
@@ -11,5 +12,5 @@ import java.util.List;
  * Description:
  */
 public interface ItemMapper {
-    List<Item> getItemList();
+    Item getItemToSolr(Item item);
 }

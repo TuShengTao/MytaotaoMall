@@ -5,7 +5,7 @@ if ( nowPage!=null && nowPage!=GlobalCurPage){
     GlobalCurPage=window.localStorage.getItem("nowPage");
 }
 
-//从首页跳转成功到search.jsp 页面加载完成就执行ajax请求到后端 接收返回的数据
+//从首页跳转成功到search.html 页面加载完成就执行ajax请求到后端 接收返回的数据
 $(document).ready(function () {
     var searchKey=window.localStorage.getItem("searchKey");
     if (searchKey==""){

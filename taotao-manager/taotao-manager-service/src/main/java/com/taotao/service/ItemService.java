@@ -2,6 +2,7 @@ package com.taotao.service;
 
 import com.taotao.common.pojo.EUDataGridResult;
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.pojo.Item;
 import com.taotao.pojo.TbItem;
 
 public interface ItemService {
@@ -25,6 +26,8 @@ public interface ItemService {
     TaotaoResult createItem(TbItem item,String desc) throws Exception;
     int deleteByPrimaryKey(Long id);
     TaotaoResult getItemDesc(long itemId);
+    TaotaoResult addItem(Item item);
+    Item getItemToSolr(Item item);
 
 
 }

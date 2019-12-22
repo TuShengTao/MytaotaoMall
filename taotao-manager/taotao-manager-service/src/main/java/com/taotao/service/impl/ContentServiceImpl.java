@@ -20,13 +20,11 @@ import com.taotao.pojo.TbContent;
 import com.taotao.service.ContentService;
 
 /**
- * 内容管理
- * <p>Title: ContentServiceImpl</p>
- * <p>Description: </p>
- * <p>Company: www.itcast.com</p> 
- * @author	入云龙
- * @date	2015年9月8日上午11:09:53
- * @version 1.0
+ * @author: tushengtao
+ * @date: 2019/12/22
+ * @Description:  内容管理
+ * @param:
+ * @return:
  */
 @Service
 public class ContentServiceImpl implements ContentService {
@@ -57,7 +55,15 @@ public class ContentServiceImpl implements ContentService {
 
 	@Override
 	public int deleteById(Long id) {
+		TbContent content=contentMapper.selectByPrimaryKey(id);
 		int flag=contentMapper.deleteByPrimaryKey(id);
+
+		//添加缓存同步逻辑  调用rest服务层
+		try {
+			HttpClientUtil.doGet(REST_BASE_URL + REST_CONTENT_SYNC_URL + content.getCategoryId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return flag;
 	}
 /**
@@ -70,6 +76,13 @@ public class ContentServiceImpl implements ContentService {
 	@Override
 	public int updateById(TbContent content) {
 		int flag=contentMapper.updateByPrimaryKey(content);
+		TbContent content2=contentMapper.selectByPrimaryKey(content.getId());
+		//添加缓存同步逻辑  调用rest服务层
+		try {
+			HttpClientUtil.doGet(REST_BASE_URL + REST_CONTENT_SYNC_URL + content2.getCategoryId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return flag;
 	}
 

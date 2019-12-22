@@ -67,11 +67,11 @@ public class OrderController {
 		return result;
 	}
 
-	@RequestMapping("/delete")
+	@RequestMapping(value = "/delete",method = RequestMethod.POST)
 	@ResponseBody
-	public TaotaoResult deleteById(TbOrder order){
+	public String deleteById(@RequestBody TbOrder order){
 		String result=orderService.deleteOrderById(order);
-		return TaotaoResult.ok(result);
+		return result;
 	}
 	@RequestMapping("/updateOrderStatus")
 	@ResponseBody

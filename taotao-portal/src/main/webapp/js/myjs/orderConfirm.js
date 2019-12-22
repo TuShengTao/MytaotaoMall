@@ -201,7 +201,6 @@ function createOrder() {
         }
     };
 
-
         $.ajax({
             url:"http://localhost:8082/order/create.html",
             type: "POST",

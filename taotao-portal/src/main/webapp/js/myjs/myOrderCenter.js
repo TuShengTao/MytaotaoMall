@@ -41,7 +41,8 @@ $(document).ready(function () {
                             break;
                         }
                     }
-                    var SingleOrder='\t<tbody >\n' +
+                    var tbOrderId='tb'+$orderId;
+                    var SingleOrder='\t<tbody id="'+tbOrderId+'" >\n' +
                         '\t\t\t\t\t\t\t\t<tr class="tr-th">\n' +
                         '\t\t\t\t\t\t\t\t\t<td colspan="6">\n' +
                         '\t\t\t\t\t\t\t\t\t\t<span class="tcol1"> 订单编号: <a name="orderIdLinks"  href="javascript:void(0);" >'+$orderId+'</a></span>\n' +
@@ -63,7 +64,7 @@ $(document).ready(function () {
                         '\t\t\t\t\t\t\t\t\t<td> <span id="totalPrice"><em style="color: red">￥ '+$payMent+'</em></span><br> 在线付款<br> </td>\n' +
                         '\t\t\t\t\t\t\t\t\t<td> <span class="ftx-03">'+$YMD+'<br>'+$HMS+'</span> <input type="hidden" id="datasubmit-2538292730" value="2014-10-20 22:30:49"> </td>\n' +
                         '\t\t\t\t\t\t\t\t\t<td><span class="ftx-03"><em style="color: red">'+$orderStatus+'</em></span></td>\n' +
-                        '\t\t\t\t\t\t\t\t\t<td id="operate2538292730" class="order-doi" width="100"> <span id="pay-button-2538292730" state=""></span> <a target="_blank" href="http://order.jd.com/normal/item.action?orderid=2538292730&amp;PassKey=769448C6BA99F1ADA8244BAE7BC60580" clstag="click|keycount|orderinfo|order_check">查看</a><span id="order_comment"></span><span class="pop-recycle-a">|<a href="javascript:void(0)" clstag="click|keycount|orderinfo|order_del" onclick="ensureMoveOrderToRecycle(2538292730,\'397FF574E089D5409E6CC8EF67129D65\');">删除</a></span><span id="doi2538292730"><br><a href="http://club.jd.com/JdVote/TradeComment.aspx?ruleid=2538292730&amp;ot=0&amp;payid=1&amp;shipmentid=70" target="_blank" clstag="click|keycount|orderinfo|order_comment">评价晒单</a><br></span><a href="http://myjd.jd.com/repair/ordersearchlist.action?searchString=2538292730" target="_blank" clstag="click|keycount|orderinfo|order_repair">申请返修/退换货</a> <a class="btn-again" clstag="click|keycount|orderlist|buy" href="http://cart.jd.com/cart/dynamic/reBuyForOrderCenter.action?wids=1113410,1222567&amp;nums=1,1&amp;rid=1419846299535" target="_blank">还要买</a> </td>\n' +
+                        '\t\t\t\t\t\t\t\t\t<td id="operate2538292730" class="order-doi" width="100"> <span id="pay-button-2538292730" state=""></span> <a target="_blank" href="http://order.jd.com/normal/item.action?orderid=2538292730&amp;PassKey=769448C6BA99F1ADA8244BAE7BC60580" clstag="click|keycount|orderinfo|order_check">查看</a><span id="order_comment"></span><span class="pop-recycle-a">|<a href="javascript:void(0)" clstag="click|keycount|orderinfo|order_del" onclick="deleteOrderById('+$orderId+')">删除</a></span><span id="doi2538292730"><br><a href="http://club.jd.com/JdVote/TradeComment.aspx?ruleid=2538292730&amp;ot=0&amp;payid=1&amp;shipmentid=70" target="_blank" clstag="click|keycount|orderinfo|order_comment">评价晒单</a><br></span><a href="http://myjd.jd.com/repair/ordersearchlist.action?searchString=2538292730" target="_blank" clstag="click|keycount|orderinfo|order_repair">申请返修/退换货</a> <a class="btn-again" clstag="click|keycount|orderlist|buy" href="http://cart.jd.com/cart/dynamic/reBuyForOrderCenter.action?wids=1113410,1222567&amp;nums=1,1&amp;rid=1419846299535" target="_blank">还要买</a> </td>\n' +
                         '\t\t\t\t\t\t\t\t</tr>\n' +
                         '\t\t\t\t\t\t\t\t</tbody>';
 
@@ -104,4 +105,24 @@ function timestampToTime(timestamp,flag) {
     else {
         return h+m+s;// 返回 时 分 秒
     }
+}
+function deleteOrderById(orderId){
+    var order={
+        "orderId":orderId
+    };
+
+    $.ajax({
+        url:"http://localhost:8082/order/delete.html",
+        type: "POST",
+        contentType : 'application/json',
+        data:JSON.stringify(order),// 向后台传入一个对象
+        dataType: "json",                //数据返回类型，可以是xml、json等
+        success: function (result) {      //成功，回调函数
+            var tbOrderId='#tb'+orderId;
+            $(tbOrderId).remove();// 删除成功之后删除html节点
+        },
+        error: function () {            //失败，回调函数
+            alert("删除订单失败！服务器错误！");
+        }
+    });
 }

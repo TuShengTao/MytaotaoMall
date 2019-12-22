@@ -2,6 +2,7 @@ package com.taotao.common.utils;
 
 import java.io.IOException;
 import java.net.URI;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -84,6 +85,15 @@ public class HttpClientUtil {
 				UrlEncodedFormEntity entity = new UrlEncodedFormEntity(paramList);
 				httpPost.setEntity(entity);
 			}
+//			//解决中文问题
+//			if (param != null) {
+//				httpPost.addHeader("Content-type","application/json; charset=utf-8");
+//
+//				httpPost.setHeader("Accept", "application/json");
+//
+//				httpPost.setEntity(new StringEntity(param.toString(), Charset.forName("UTF-8")));
+//
+//			}
 			// 执行http请求
 			response = httpClient.execute(httpPost);
 			resultString = EntityUtils.toString(response.getEntity(), "utf-8");

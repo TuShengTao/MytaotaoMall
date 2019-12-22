@@ -25,7 +25,7 @@ public class SearchController {
     @Autowired
     private SearchService searchService;
 
-    @RequestMapping(value = "/query", method = RequestMethod.GET)
+    @RequestMapping(value = "/query",produces = "application/json;charset=utf-8")
     @ResponseBody
     public TaotaoResult search(@RequestParam("q") String queryString, @RequestParam(defaultValue = "1") Integer page,
                                @RequestParam(defaultValue = "60") Integer rows) {

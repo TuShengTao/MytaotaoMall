@@ -1,6 +1,8 @@
 package com.taotao.search.service;
 
 import com.taotao.common.pojo.TaotaoResult;
+import com.taotao.pojo.TbItem;
+import com.taotao.search.pojo.Item;
 
 /**
  * Created on 2019/11/19
@@ -10,4 +12,5 @@ import com.taotao.common.pojo.TaotaoResult;
  */
 public interface ItemService {
     TaotaoResult importAllItems();
+    TaotaoResult addItem(Item item);
 }
